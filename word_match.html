@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge ,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Interactive Contents</title>
+	<link rel="canonical" href="" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<!--link rel="shortcut icon" href="favicon.ico">-->
+	<link rel="stylesheet" type="text/css" href="css/NotoSansKR.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/common.js"></script>
+	
+	<style type="text/css">
+	@media screen and (orientation :portrait){
+		html, body{width:100%;height:100%;min-width:100%}
+		.warning{display:table;background:#282830 url(images/activity/img_revert.png) no-repeat 50% 40% / 100% auto;text-align:center;vertical-align:middle;width:100%;height:100%;text-indent:-9999em;}
+		.starter{display:none}
+		.port_wrap{display:none}
+		.activity_wrap{display:none;}
+	}
+	@media screen and (orientation :landscape){
+		html, body{background-color:#000;height:100%;vertical-align:middle;overflow:hidden;}
+		.warning{display:none;}
+		.starter{overflow:hidden;position:absolute;margin:0 auto;display:inline-block;text-align:center;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
+		.starter a{display:block;position:absolute;left:32.34%;bottom:20.13%;width:35.31%;z-index:150}
+		.btn_retry a{display:block;position:fixed;left:50%;top:50%;width:17.54%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
+		.ico_o, .ico_x, .result_box{display:none;position:fixed;left:0;top:0;z-index:200;}
+
+		.activity_wrap{display:none;position:absolute;margin:0 auto;text-align:center;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);overflow:hidden;}
+		.round{/*display:none;*/position:absolute;left:0;top:0;width:100%;height:100%;}
+		.main_bg{max-width:100%;max-height:100%;text-align:center;position:relative;}
+		.main_bg img{vertical-align:middle;text-align:center;max-width:100vw;max-height:calc(var(--vh, 1vh) * 100);width:auto;}
+
+		.score{position:absolute;right:3.35%;top:27.22%;width:9.37%;font-size:1.875vw;color:#fff;font-weight:700;letter-spacing:-.02em;}
+		/*.score .dp_flex{position:absolute;left:0;top:0%;width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction: column;}*/
+		.score span{font-weight:900;}
+		.score .num{font-size:3.125vw;line-height:1.4;}
+
+		.card_list{position:absolute;left:9.375%;top:24.3%;display:flex;flex-wrap:wrap;width:81.25%;height:51.38%;}
+		.card_list li{width:20%;height:50%;padding:5px;}
+		
+		
+		.card_list li img{max-height:100%;}
+		.card_list li a{position:relative;display:inline-flex;width:100%;height:100%;align-items:center;justify-content:center;background:#fff}
+		.card_list li a.active:after{content:'';position:absolute;left:0;top:0;z-index:1;display:block;width:100%;height:100%;background:rgba(85, 124, 242, .2);border:6px solid #557CF2;box-sizing:border-box;}
+		.card_list li a.clear:after{content:'';position:absolute;left:0;top:0;z-index:1;display:block;width:100%;height:100%;background:#557CF2 url('images/activity/wordmatch/img_clear.png') no-repeat 50% 50% / 100% auto;box-sizing:border-box;}
+
+		/*.a_area{position:relative;left:0;top:63.05%;width:100%;height:36.95%;}
+		.a_area a{position:absolute;display:inline-flex;align-items:center;width:39.06%;height:33.08%;padding:1.51% 1.5% 1.51% 6.8%;font-size:2.81vw;line-height:1.3;color:#000;font-weight:700;background:#fff;text-align:left;border-radius:1.25vw;box-sizing:border-box;}
+		.a_area a.a_1{left:9.37%;top:9.02%}
+		.a_area a.a_2{left:51.56%;top:9.02%}
+		.a_area a.a_3{left:9.37%;top:51.12%}
+		.a_area a.a_4{left:51.56%;top:51.12%}
+		.a_area a.chk{color:#22A255}
+		.a_area a .a_num{position:absolute;left:4.8%;top:25%;width:8.8%;}
+		.a_area a .a_num img{width:100%}*/
+
+		.result_box{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
+		.result_box .score_box{position:absolute;left:50%;top:4.16%;width:53.12%;height:61.11%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
+		.result_box .score_box .txt_score{position:absolute;left:50%;top:27.27%;width:35.29%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);border-radius:50%;}
+		.result_box .score_box .txt_score:before{content:'';display:block;padding-top:100%;}
+		.result_box .score_box .txt_score .num{position:absolute;left:0;top:0;right:0;bottom:0;display:flex;justify-content:center;padding-top:45.91%;color:#FFC85F;font-family:'yg-jalnan';font-size:6.87vw;letter-spacing:-0.02em;box-sizing:border-box;}
+		.result_box .btn_retry{position:absolute;left:50%;top:70.55%;width:34.375%;height:13.88%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
+	}
+	</style>
+</head>
+<body>
+	<div class="warning">이 페이지는 가로 보기에 최적화 되어 있습니다. 기기를 회전하여 주세요.</div>
+	<div class="starter">
+		<div class="main_bg">
+			<img src="images/activity/wordmatch/main_match.jpg" alt="그림에 맞는 정답을 맞춰보세요.">
+		</div>
+		<a href="javascript://" class="btn_start"><img src="images/activity/btn_play.png" alt="PLAY" /></a>
+	</div>
+	<div class="port_wrap">
+		<div class="activity_wrap">
+			<div class="main_bg">
+				<img src="images/activity/wordmatch/bg_match.jpg" alt="WORD MATCH">
+			</div>
+			<div class="score">
+				<img src="images/activity/bg_score.png" alt="">
+				<span>Score : <span class="num">0</span></span>
+			</div>
+			<div class="round">
+				<ul class="card_list">
+				</ul>
+			</div>
+			<span class="ico_o"><img src="images/activity/ico_o.png" alt="O"></span>
+			<span class="ico_x"><img src="images/activity/ico_x.png" alt="X"></span>
+			<div class="result_box">
+				<div class="score_box">
+					<p><img src="images/activity/img_clear.png" alt="activity Clear! Score"></p>
+					<strong class="txt_score"><span class="num"></span></strong>
+				</div>
+				<a href="javascript:goRetry();" class="btn_retry"><img src="images/activity/btn_replay.png" alt="다시풀기"></a>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	$(function() {
+		$('.btn_start').click(function () {
+			$('.starter').hide();
+			start();
+		});
+		
+		//폰트 리사이징
+		function fontResize(){
+			if($('.activity_wrap').width() < $(window).innerWidth() || $('.activity_wrap').height() < $(window).innerHeight()){
+				//$('.a_area a').css('zoom','0.85');
+				//$('.a_area a').css('line-height','1.2');
+				$('.result_box .score_box .txt_score .num').css({'zoom':'0.75'});
+				$('.score .dp_flex .num').css({'line-height':'1.2', 'zoom':'0.65'});
+			}
+		}
+
+		fontResize();
+
+		$(window).resize(function(){
+			fontResize();
+		});
+		
+	});
+
+	const cardData = [];
+	const cardImg = ['sample1', 'sample2', 'sample3', 'sample4', 'sample5'];
+	const cardWord = ['ball', 'smile', 'underground', 'marshmallow', 'number'];
+	const setItem = 5; //문제갯수
+	let openCard =[] //오픈한 카드
+
+	let round = 0;
+		score = 0;
+		chk = 0;
+
+	function start(){
+		round++;
+		$('.starter').hide();
+		$('.activity_wrap').show();
+		$('.round').show();
+		
+
+		let randomNumberArr = [];
+
+		for (let i = 0; i < setItem; i++) {
+			// 랜덤 값 뽑기
+			let randomNumber = getRandom(5, 0);
+
+			// 중복 검사
+			// cardDeckImgArr 안에 random 값이 없다면 cardDeckImgArr에 추가
+			// cardDeckImgArr 안에 random 값이 있으면 인덱스 1 감소
+			
+			if (randomNumberArr.indexOf(randomNumber) === -1) {
+				randomNumberArr.push(randomNumber);
+			} else {
+				i--;
+			}
+		}
+
+		// 카드는 두 장씩 필요하므로 한 번 더 추가 (Spread operator와 push()를 이용)
+		randomNumberArr.push(...randomNumberArr);
+		
+
+		// 카드 섞기
+		shuffle(randomNumberArr);
+
+		console.log(randomNumberArr);
+
+		
+
+		// 섞은 값으로 카드 세팅
+		for (let i = 0; i < setItem; i++) {
+			cardData.push({card: cardImg[randomNumberArr[i]]});
+			cardData.push({card: cardWord[randomNumberArr[i]]});
+		}
+
+		setCard();
+
+		return cardData;
+		
+	}
+
+	//카드세팅
+	const gameBoard = document.getElementsByClassName("card_list")[0];
+	function setCard() {
+		for (let i = 0; i < setItem; i++) {
+			gameBoard.innerHTML = gameBoard.innerHTML +
+			`
+				<li>
+					<a href="javascript:answerCheck('${cardWord[i]}');" data-card="${cardWord[i]}_img">
+						<img src="images/activity/wordmatch/${cardImg[i]}.png" alt="${cardWord[i]}">
+					</a>
+				</li>
+				<li>
+					<a href="javascript:answerCheck('${cardWord[i]}');" data-card="${cardWord[i]}">
+						${cardWord[i]}
+					</a>
+				</li>
+
+			`;
+		}
+	}
+
+	function shuffle(array) {
+		array.sort(() => Math.random() - 0.5);
+	}
+
+	function getRandom(max, min) {
+		return parseInt(Math.random() * (max - min)) + min;
+	}
+	
+	function nextRound(){
+		openCard = [];
+		chk = 0;
+
+		round++;
+
+		if ((round-1) == setItem){
+			setScore();
+			$('.result_box').fadeIn('fast');
+			$('.score_box .txt_score .num').text(score);
+		} else{
+			setScore();
+			//$('.round_' + (round - 1)).hide();
+			//$('.round_' + round).show();
+		}
+	}
+
+	function setScore(){
+		$('.score .num').text(score);
+	}
+
+	//오답
+	function wrong(){
+		score -= 10;
+		$('.ico_x').fadeIn('slow');
+		setTimeout(function(){
+			$('.ico_x').hide();
+			nextRound();
+		}, 2000);
+	}
+
+	
+
+	//정오답체크
+	function answerCheck(name){
+		chk ++;
+		$('.card_list li a[data-card='+name+']').addClass('active');
+
+		openCard.push($('.card_list li a').attr('data-card'));
+		console.log(openCard);
+
+		if(chk == 2){
+			//정답체크
+			if(openCard[0] == openCard[1]){
+				//정답
+				$('.card_list li a.active').removeClass('active').addClass('clear');
+
+				score += 100;
+				$('.ico_o').fadeIn('slow');
+				setTimeout(function(){
+					$('.ico_o').hide();
+					nextRound();
+				}, 2000);
+			}else{
+				wrong();
+			}
+		}
+		
+
+
+		/*if($('.round_'+round).find('.a_area a.chk').length < 1){
+			$('.round_'+round).find('.a_area .a_' + num).addClass('chk');
+			$('.round_'+round).find('.a_area .a_' + num).find('img').attr('src','images/activity/ico_chk2.svg');
+		}
+		
+		if($('.round_'+round).find('.a_area').find('.a_' + num).attr('data') == 'answer'){
+			//정답
+			score += 100;
+			$('.ico_o').fadeIn('slow');
+			setTimeout(function(){
+				$('.ico_o').hide();
+				nextRound();
+			}, 2000);
+		} else {
+			//오답
+			wrong();
+		}*/
+	}
+
+	//다시하기
+	function goRetry(){
+		round = 0;
+		score = 0;
+		$('.score .num').text(score);
+		//$('.a_area a.chk').removeClass('chk');
+
+		$('.result_box, .round').hide();
+		start();
+	}
+
+	</script>
+</html>
