@@ -21,8 +21,6 @@
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/common.js"></script>
 	<script type="text/javascript">
-	//순서 뒤죽박죽 선택했을 때 힌트 누르면 어케되나요?
-
 	const mainData = [
 		{
 			answerSentence:'Do you want some milk?',
@@ -49,8 +47,6 @@
 		hintChance = 2; //힌트 기회
 		audioPlay = 0; // 음원 플레이 여부
 		isAudioBlink = 0;
-		wordItem = $('.item_area a'); //보기 단어 버튼들
-		userInp = $('.user_inp'); //사용자 입력에 따라 문장 완성되는 창
 		correctCheck = new Array();
 
 	$(function() {
@@ -59,21 +55,6 @@
 			$('.round').show();
 			start();
 		});
-		
-		//폰트 리사이징
-		/*function fontResize(){
-			if($('.activity_wrap').width() < $(window).innerWidth() || $('.activity_wrap').height() < $(window).innerHeight()){
-				//$('#q_num').css('zoom','0.85');
-				$('.result_box .score_box .txt_score .num').css({'zoom':'0.75'});
-				//$('.head .score').css({'letter-spacing':'-0.04em', 'zoom':'0.75'});
-			}
-		}
-
-		fontResize();
-
-		$(window).resize(function(){
-			fontResize();
-		});*/
 	});
 
 	function start(){
@@ -112,14 +93,11 @@
 		$('.board').removeClass('h_full');
 		$('.board .result').hide();
 		$('.item_area *').remove();
-		//$('.btn_hint.disabled').removeClass('disabled');
 		$('.btn_hint').find('img').attr('src','images/activity/unscramble/btn_hint_2.png');
 		$('.btn_reset').find('img').attr('src','images/activity/unscramble/btn_reset.png');
 		$('.result .ico').hide();
 		$('.txt_round_chance').find('img').attr('src','images/activity/unscramble/round_chance_3.png');
 		$('.btn_listening img').attr('src','images/activity/unscramble/btn_listening.png');
-		
-		
 	}
 
 	//남은 기회 때 보드 초기화
@@ -132,9 +110,6 @@
 
 	function setHint(){
 		$('.btn_hint').find('img').attr('src','images/activity/unscramble/btn_hint_'+hintChance+'.png');
-		/*if(hintChance == 0){
-			$('.btn_hint').addClass('disabled');
-		}*/
 	}
 
 	function setScore(){
@@ -150,7 +125,6 @@
 	}
 
 	function nextRound(){
-		//오디오 정지!!!!
 		var myAudio = document.getElementById("myAudio"); 
 		myAudio.pause();
 		/*if (myAudio.duration > 0 && !myAudio.paused) {
@@ -169,7 +143,6 @@
 				//다음문제로
 				roundInit(); //변수 화면 등등 라운드 초기화
 				setQuiz();
-				//setScore();
 				setRound();
 			}
 		} else{
@@ -178,6 +151,7 @@
 		
 	}
 
+	//듣기버튼유도
 	function audioSetBlink(){
 		function blink(){
 			$('.btn_listening img').attr('src','images/activity/unscramble/btn_listening2.png');
@@ -188,11 +162,7 @@
 		if(!isAudioBlink && audioPlay == 0){
 			isAudioBlink = 1;
 			blinkTimer = setInterval(blink, 800);
-		}/*else if(!isAudioBlink && audioPlay == 1){
-		}else{
-			isAudioBlink = 0;
-			clearInterval(blinkTimer);
-		}*/ else if(isAudioBlink && audioPlay == 1){
+		}else if(isAudioBlink && audioPlay == 1){
 			isAudioBlink = 0;
 			clearInterval(blinkTimer);
 		}
@@ -221,7 +191,6 @@
 			btnTurn --;
 			$(this).removeClass('selected');
 			$('.user_inp').find('.'+itemName).remove();
-			
 		}
 
 		//모든 선택 후 최종 정오답 체크
@@ -236,7 +205,6 @@
 		$('.board').addClass('h_full');
 		$('.board .result').show();
 		setScore();
-		//여기서 힌트, 리셋 버튼 비활성화
 		$('.btn_hint').find('img').attr('src','images/activity/unscramble/btn_hint_0.png');
 		$('.btn_reset').find('img').attr('src','images/activity/unscramble/btn_reset_disabled.png');
 	}
@@ -247,7 +215,6 @@
 		$('.result .ico_o').show();
 		roundFinish();
 	}
-
 
 	//오답
 	function wrong(){
@@ -268,24 +235,43 @@
 
 	//음원듣기
 	function play(){
-		//isAudioBlink = 0
-		//clearInterval(audioBlinkTime);
 		audioPlay = 1;
 		audioSetBlink();
-		
 
 		var myAudio = document.getElementById("myAudio"); 
 		$('#myAudio').attr('src',mainData[round-1].audioFile);
 		myAudio.play();
-
-		//$('.btn_listening img').attr('src','images/activity/unscramble/btn_listening.png');
 	}
 
 	//HINT
 	function hint(){
-		console.log(hintChance, btnTurn);
-		if(hintChance > 0){
+		//정답텍스트 영역 정오답 체크
+		let inpCnt = $('.user_inp a').length;
+			inpArray = [];
+			inpSort = [];
+			oxChk = 0;
+
+		for(let i = 0; i < inpCnt; i++) {
+			var inpData = $('.user_inp a').eq(i).attr('data-turn');
+			inpArray.push(inpData);
+			inpSort.push(i+1);
+			//선택값비교
+			if(inpArray[i] != inpSort[i]){
+				oxChk = 1;
+				$('.user_inp a.item').eq(i).addClass('incorrect');
+			}
+		}
+
+		if(hintChance > 0 && oxChk == 0){
+			//선택한 단어들이 정답일때만 노랑이 깜빡
 			$('.item_' + btnTurn).addClass('hint');
+			setTimeout(function(){
+				$('.item_' + btnTurn).removeClass('hint');
+			}, 1000);
+			//
+			hintChance --;
+			setHint();
+		}else if(hintChance > 0 && oxChk == 1){
 			hintChance --;
 			setHint();
 		}
@@ -321,7 +307,7 @@
 		}
 	}
 
-	//닫기버튼
+	//닫기
 	function winClose(){
 		$('.close_confirm').show();
 	}
@@ -380,10 +366,9 @@
 		#q_num{position:absolute;right:2.34%;bottom:2.77%;z-index:10;width:6.40%;font-weight:900;font-size:1.87vw;color:#000}
 		#q_num .dp_flex{position:absolute;left:0;top:0%;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
 		
-		.q_content{position:absolute;left:0;top:0;width:100%;/*height:calc(100vh - 14.44%);*/height:100%}
+		.q_content{position:absolute;left:0;top:0;width:100%;height:100%}
 
 		.head{position:relative;width:78.125%;margin:0 auto;}
-		/*.head .frame{position:absolute;left:0;top:0;padding:0 2%;display:block;box-sizing:border-box;}*/
 		.head .score{position:absolute;left:6.6%;top:37%;font-size:1.875vw;color:#fff;font-weight:700;letter-spacing:-.02em;}
 		.head .txt_round_chance{position:absolute;left:26.6%;top:39.39%;width:14%}
 		.head a{position:relative;z-index:10;display:inline-block;width:12%;}
@@ -391,10 +376,11 @@
 		.head .btn_reset{position:absolute;right:8%;top:16.66%;background:none}
 		.head .btn_reset:before{display:none}
 		.head .btn_close{position:absolute;right:0;top:0;width:5.82%;}
-		.board{position:relative;width:78.125%;min-height:28.05%;/*max-height:60%;*/padding:2% 4%;margin:0 auto 3.16%;background:#fff;color:#000;font-weight:700;border:2px solid #565E90;border-top:0 none;box-sizing:border-box}
-		.board.h_full{/*overflow-y:auto;*/display:flex;min-height:73%}
+		.board{position:relative;width:78.125%;min-height:28.05%;padding:2% 4%;margin:0 auto 3.16%;background:#fff;color:#000;font-weight:700;border:2px solid #565E90;border-top:0 none;box-sizing:border-box}
+		.board.h_full{display:flex;min-height:73%}
 		.board .user_inp{text-align:left}
 		.board .user_inp a{display:inline-block;margin-right:1.4%;color:#000;font-size:2.34vw;line-height:1.3;pointer-events:none;}
+		.board .user_inp a.incorrect{color:red}
 		.board .user_inp .txt_info{position:absolute;left:50%;top:50%;width:100%;color:#C1C1C1;font-weight:700;font-size:2.34vw;text-align:center;transform:translate(-50%, -50%);}
 		
 		.board.h_full .result_inner{}
@@ -402,10 +388,10 @@
 		.board.h_full .result{display:flex;flex-direction:column;width:100%;height:100%;}
 		.board .result .ico{display:none;width:14%;margin:0 auto}
 		.board .result .answer{margin:1% 0 3%;font-size:3vw;line-height:3.9vw;font-weight:700;text-align:left;}
-		.board .result .btn_box{/*position:absolute;left:0;bottom:6.25%;width:100%;*/margin-top:auto}
+		.board .result .btn_box{margin-top:auto}
 		.board .result .txt_play_info{margin-bottom:1.4%;font-size:1.6vw;line-height:2.3vw;font-weight:400}
 		.board .result a{display:inline-block;width:25%;margin:0 1%;}
-		.item_area{/*overflow-y:auto;*/width:78.125%;/*max-height:calc(100% - 70px);*/margin:0 auto;text-align:left;}
+		.item_area{width:78.125%;margin:0 auto;text-align:left;}
 		.item_area a{display:inline-block;margin-bottom:1.58%;margin-right:1.56%;padding:1.17% 2%;background:#565E90;border-radius:8px;color:#fff;font-size:2.18vw;font-weight:700;border:0 none}
 		.item_area a.selected{background:#01D0B0;color:#000;}
 		.item_area a.hint{background:#FFED80;color:#565E90}
@@ -433,7 +419,6 @@
 		.board .user_inp .txt_info{font-size:1.97vw}
 		.item_area{width:90.88%;padding-bottom:1.19%}
 		.item_area a{padding:2%;}
-		/*.board.h_full{height:100%}*/
 	}
 	</style>
 </head>
