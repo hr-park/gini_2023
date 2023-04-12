@@ -61,7 +61,7 @@
 		});
 		
 		//폰트 리사이징
-		function fontResize(){
+		/*function fontResize(){
 			if($('.activity_wrap').width() < $(window).innerWidth() || $('.activity_wrap').height() < $(window).innerHeight()){
 				//$('#q_num').css('zoom','0.85');
 				$('.result_box .score_box .txt_score .num').css({'zoom':'0.75'});
@@ -73,7 +73,7 @@
 
 		$(window).resize(function(){
 			fontResize();
-		});
+		});*/
 	});
 
 	function start(){
@@ -112,11 +112,13 @@
 		$('.board').removeClass('h_full');
 		$('.board .result').hide();
 		$('.item_area *').remove();
-		$('.btn_hint.disabled').removeClass('disabled');
+		//$('.btn_hint.disabled').removeClass('disabled');
 		$('.btn_hint').find('img').attr('src','images/activity/unscramble/btn_hint_2.png');
+		$('.btn_reset').find('img').attr('src','images/activity/unscramble/btn_reset.png');
 		$('.result .ico').hide();
 		$('.txt_round_chance').find('img').attr('src','images/activity/unscramble/round_chance_3.png');
 		$('.btn_listening img').attr('src','images/activity/unscramble/btn_listening.png');
+		
 		
 	}
 
@@ -130,9 +132,9 @@
 
 	function setHint(){
 		$('.btn_hint').find('img').attr('src','images/activity/unscramble/btn_hint_'+hintChance+'.png');
-		if(hintChance == 0){
+		/*if(hintChance == 0){
 			$('.btn_hint').addClass('disabled');
-		}
+		}*/
 	}
 
 	function setScore(){
@@ -167,7 +169,7 @@
 				//다음문제로
 				roundInit(); //변수 화면 등등 라운드 초기화
 				setQuiz();
-				setScore();
+				//setScore();
 				setRound();
 			}
 		} else{
@@ -233,6 +235,10 @@
 		$('.item_area').hide()
 		$('.board').addClass('h_full');
 		$('.board .result').show();
+		setScore();
+		//여기서 힌트, 리셋 버튼 비활성화
+		$('.btn_hint').find('img').attr('src','images/activity/unscramble/btn_hint_0.png');
+		$('.btn_reset').find('img').attr('src','images/activity/unscramble/btn_reset_disabled.png');
 	}
 
 	//정답
@@ -386,13 +392,14 @@
 		.head .btn_reset:before{display:none}
 		.head .btn_close{position:absolute;right:0;top:0;width:5.82%;}
 		.board{position:relative;width:78.125%;min-height:28.05%;/*max-height:60%;*/padding:2% 4%;margin:0 auto 3.16%;background:#fff;color:#000;font-weight:700;border:2px solid #565E90;border-top:0 none;box-sizing:border-box}
-		.board.h_full{/*overflow-y:auto;*/min-height:73%}
+		.board.h_full{/*overflow-y:auto;*/display:flex;width:100%;min-height:73%}
 		.board .user_inp{text-align:left}
 		.board .user_inp a{display:inline-block;margin-right:1.4%;color:#000;font-size:2.34vw;line-height:1.3;pointer-events:none;}
 		.board .user_inp .txt_info{position:absolute;left:50%;top:50%;width:100%;color:#C1C1C1;font-weight:700;font-size:2.34vw;text-align:center;transform:translate(-50%, -50%);}
 		
+		.board.h_full .result_inner{}
 		.board .result{display:none;}
-		.board.h_full .result{display:flex;flex-direction:column;height:100%;}
+		.board.h_full .result{display:flex;flex-direction:column;width:100%;height:100%;}
 		.board .result .ico{display:none;width:14%;margin:0 auto}
 		.board .result .answer{margin:1% 0 3%;font-size:3vw;line-height:3.9vw;font-weight:700;text-align:left;}
 		.board .result .btn_box{/*position:absolute;left:0;bottom:6.25%;width:100%;*/margin-top:auto}
@@ -419,7 +426,7 @@
 	@media screen and (orientation :landscape) and  (max-width:812px){
 		.round{padding:0}
 		.head{width:100%}
-		.head .score{left:8.5%;top:45%;}
+		.head .score{left:8.5%;top:42%;}
 		.board{width:100%;min-height:48%;margin-bottom:2.77%;}
 		.board.h_full{overflow-y:auto;min-height:calc(100% - 10.9%);margin:0}
 		.board .user_inp a{margin-right:0.78%;}
@@ -465,14 +472,16 @@
 						<div class="user_inp">
 							<p class="txt_info">아래의 워드 퍼즐을 순서대로 눌러주세요!</p>
 						</div>
-						<div class="result">
-							<div class="ico ico_o"><img src="images/activity/unscramble/ico_o.png" alt="O"></div>
-							<div class="ico ico_x"><img src="images/activity/unscramble/ico_x.png" alt="X"></div>
-							<p class="answer"></p>
-							<div class="btn_box">
-								<p class="txt_play_info">최초 음원 재생 1회 후 다음으로 넘어갈 수 있어요.</p>
-								<a href="javascript:play();" class="btn_listening"><img src="images/activity/unscramble/btn_listening.png" alt="HINT"></a>
-								<a href="javascript:nextRound();" class="btn_next"><img src="images/activity/unscramble/btn_next.png" alt="다음으로"></a>
+						<div class="result_inner">
+							<div class="result">
+								<div class="ico ico_o"><img src="images/activity/unscramble/ico_o.png" alt="O"></div>
+								<div class="ico ico_x"><img src="images/activity/unscramble/ico_x.png" alt="X"></div>
+								<p class="answer"></p>
+								<div class="btn_box">
+									<p class="txt_play_info">최초 음원 재생 1회 후 다음으로 넘어갈 수 있어요.</p>
+									<a href="javascript:play();" class="btn_listening"><img src="images/activity/unscramble/btn_listening.png" alt="HINT"></a>
+									<a href="javascript:nextRound();" class="btn_next"><img src="images/activity/unscramble/btn_next.png" alt="다음으로"></a>
+								</div>
 							</div>
 						</div>
 					</div>
