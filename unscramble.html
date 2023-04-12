@@ -243,9 +243,9 @@
 
 	//정답
 	function answer(){
-		roundFinish();
-		$('.result .ico_o').show();
 		score += 100;
+		$('.result .ico_o').show();
+		roundFinish();
 	}
 
 
@@ -254,9 +254,9 @@
 		roundChance --;
 		$('.txt_round_chance').find('img').attr('src','images/activity/unscramble/round_chance_'+roundChance+'.png');
 		if(roundChance == 0){
+			score -= 10;
 			roundFinish();
 			$('.result .ico_x').show();
-			score -= 10;
 		}else{
 			$('#ico_chance_x').show();
 			setTimeout(function(){
