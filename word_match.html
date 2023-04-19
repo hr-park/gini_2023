@@ -137,9 +137,16 @@
 </body>
 
 <script type="text/javascript">
-	const urlParams = new URL(location.href).searchParams;
-	const qNum = urlParams.get('qNum');
-	console.log(qNum)
+	//퍼블
+	let para = getParameter('qNum');
+
+	function getParameter(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+	//퍼블 후 삭제
 
 	$(function() {
 		$('.btn_start').click(function () {
@@ -166,7 +173,7 @@
 	const cardData = [];
 		cardImg = ['sample1', 'sample2', 'sample3', 'sample4', 'sample5'];
 		cardWord = ['ball', 'smile', 'underground', 'marshmallow', 'number'];
-		setItem = 1; //문제갯수
+		setItem = para; //문제갯수
 	let openCard =[] //오픈한 카드
 
 	let round = 0;
