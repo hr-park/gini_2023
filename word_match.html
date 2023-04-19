@@ -34,45 +34,61 @@
 		html, body{background-color:#000;height:100%;vertical-align:middle;overflow:hidden;}
 		.warning{display:none;}
 		.starter{overflow:hidden;position:absolute;margin:0 auto;display:inline-block;text-align:center;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
-		.starter a{display:block;position:absolute;left:32.34%;bottom:20.13%;width:35.31%;z-index:150}
+		.starter a{display:block;position:absolute;left:36.09%;bottom:11.11%;width:27.81%;z-index:150}
 		.btn_retry a{display:block;position:fixed;left:50%;top:50%;width:17.54%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
-		.ico_o, .ico_x, .result_box{display:none;position:fixed;left:0;top:0;z-index:200;}
+		.ico_o, .ico_x, .result_box, .close_confirm{display:none;position:fixed;left:0;top:0;z-index:200;}
 
 		.activity_wrap{display:none;position:absolute;margin:0 auto;text-align:center;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);overflow:hidden;}
-		.round{/*display:none;*/position:absolute;left:0;top:0;width:100%;height:100%;}
+		./*round{display:none;position:absolute;left:0;top:0;width:100%;height:100%;}*/
 		.main_bg{max-width:100%;max-height:100%;text-align:center;position:relative;}
 		.main_bg img{vertical-align:middle;text-align:center;max-width:100vw;max-height:calc(var(--vh, 1vh) * 100);width:auto;}
 
-		.score{position:absolute;right:3.35%;top:27.22%;width:9.37%;font-size:1.875vw;color:#fff;font-weight:700;letter-spacing:-.02em;}
-		/*.score .dp_flex{position:absolute;left:0;top:0%;width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction: column;}*/
-		.score span{font-weight:900;}
-		.score .num{font-size:3.125vw;line-height:1.4;}
+		.score{position:absolute;left:8.59%;top:8.19%;width:16.01%;display:flex;align-items:center;font-size:2.03vw;color:#000;font-weight:700;letter-spacing:-.02em;}
+		.score .dp_flex{displa}
+		.score .dp_flex{position:absolute;left:0;top:0;display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding-left:5.36%;box-sizing:border-box}
+		.score .num{display:inline-block;margin-left:3.9%;font-size:2.03vw;}
 
-		.card_list{position:absolute;left:9.375%;top:24.3%;display:flex;flex-wrap:wrap;width:81.25%;height:51.38%;}
-		.card_list li{width:20%;height:50%;padding:5px;}
-		
-		
+		.card_list{position:absolute;left:50%;top:24.3%;display:flex;flex-wrap:wrap;width:81.25%;height:51.38%;transform:translate(-50%, 0)}
+		.card_list li{width:20%;height:50%;padding:0.39%;}
+
+		.card_list.list_4{width:64.84%;height:51.38%;}
+		.card_list.list_4 li{width:25%;}
+		.card_list.list_4 li a{font-size:1.562vw}
+		.card_list.list_3{top:21.52%;width:76.562%;height:56.94%;}
+		.card_list.list_3 li{width:33.33%;}
+		.card_list.list_2 li a{font-size:2.34vw;}
+		.card_list.list_2{top:21.52%;width:57.03%;height:56.94%;}
+		.card_list.list_2 li{width:50%;}
+		.card_list.list_2 li a{font-size:3.125vw;}
+		.card_list.list_1{top:25%;width:63.28%;height:50%;}
+		.card_list.list_1 li{width:50%;height:100%;}
+		.card_list.list_1 li a{font-size:3.125vw;}
+
 		.card_list li img{max-height:100%;}
-		.card_list li a{position:relative;display:inline-flex;width:100%;height:100%;align-items:center;justify-content:center;background:#fff}
-		.card_list li a.active:after{content:'';position:absolute;left:0;top:0;z-index:1;display:block;width:100%;height:100%;background:rgba(85, 124, 242, .2);border:6px solid #557CF2;box-sizing:border-box;}
-		.card_list li a.clear:after{content:'';position:absolute;left:0;top:0;z-index:1;display:block;width:100%;height:100%;background:#557CF2 url('images/activity/wordmatch/img_clear.png') no-repeat 50% 50% / 100% auto;box-sizing:border-box;}
+		.card_list li a{position:relative;display:inline-flex;width:100%;height:100%;align-items:center;justify-content:center;background:#fff;color:#000;font-size:1.5625vw;font-weight:700}
+		.card_list li a.active{pointer-events:none;}
+		.card_list li a.active:after{content:'';position:absolute;left:0;top:0;z-index:1;display:block;width:100%;height:100%;background:rgba(85, 124, 242, .2);border:0.46vw solid #557CF2;box-sizing:border-box;}
+		.card_list li a.clear{background:#557CF2}
+		.card_list li a.clear img{width:58%;}
+		.card_list li a.clear:after{background:none;border-color:#fff}
 
-		/*.a_area{position:relative;left:0;top:63.05%;width:100%;height:36.95%;}
-		.a_area a{position:absolute;display:inline-flex;align-items:center;width:39.06%;height:33.08%;padding:1.51% 1.5% 1.51% 6.8%;font-size:2.81vw;line-height:1.3;color:#000;font-weight:700;background:#fff;text-align:left;border-radius:1.25vw;box-sizing:border-box;}
-		.a_area a.a_1{left:9.37%;top:9.02%}
-		.a_area a.a_2{left:51.56%;top:9.02%}
-		.a_area a.a_3{left:9.37%;top:51.12%}
-		.a_area a.a_4{left:51.56%;top:51.12%}
-		.a_area a.chk{color:#22A255}
-		.a_area a .a_num{position:absolute;left:4.8%;top:25%;width:8.8%;}
-		.a_area a .a_num img{width:100%}*/
+		.card_list.list_3 li a.clear img{width:43.43%;}
+		.card_list.list_2 li a.clear img{width:38.61%;}
+		.card_list.list_1 li a.clear img{width:52%;}
+
+		.close_confirm{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
+		.close_confirm .confirm_box{position:absolute;left:50%;top:13.88%;width:53.125%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
+		.close_confirm .btn_continue{position:absolute;left:50%%;top:64.16%;width:31.48%;margin-left:-33.08%;}
+		.close_confirm .btn_exit{position:absolute;left:50%;top:64.16%;width:31.48%;}
 
 		.result_box{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
 		.result_box .score_box{position:absolute;left:50%;top:4.16%;width:53.12%;height:61.11%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
 		.result_box .score_box .txt_score{position:absolute;left:50%;top:27.27%;width:35.29%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);border-radius:50%;}
 		.result_box .score_box .txt_score:before{content:'';display:block;padding-top:100%;}
 		.result_box .score_box .txt_score .num{position:absolute;left:0;top:0;right:0;bottom:0;display:flex;justify-content:center;padding-top:45.91%;color:#FFC85F;font-family:'yg-jalnan';font-size:6.87vw;letter-spacing:-0.02em;box-sizing:border-box;}
-		.result_box .btn_retry{position:absolute;left:50%;top:70.55%;width:34.375%;height:13.88%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
+		.result_box .btn_retry{position:absolute;left:50%;top:71.11%;width:31.48%;margin-left:-33.08%;}
+		.result_box .btn_exit{position:absolute;left:50%;top:71.11%;width:31.48%;}
+		.btn_close{position:absolute;right:1.64%;top:6.11%;width:7.03%;}
 	}
 	</style>
 </head>
@@ -82,7 +98,7 @@
 		<div class="main_bg">
 			<img src="images/activity/wordmatch/main_match.jpg" alt="그림에 맞는 정답을 맞춰보세요.">
 		</div>
-		<a href="javascript://" class="btn_start"><img src="images/activity/btn_play.png" alt="PLAY" /></a>
+		<a href="javascript://" class="btn_start"><img src="images/activity/wordmatch/btn_play.png" alt="PLAY" /></a>
 	</div>
 	<div class="port_wrap">
 		<div class="activity_wrap">
@@ -90,8 +106,8 @@
 				<img src="images/activity/wordmatch/bg_match.jpg" alt="WORD MATCH">
 			</div>
 			<div class="score">
-				<img src="images/activity/bg_score.png" alt="">
-				<span>Score : <span class="num">0</span></span>
+				<img src="images/activity/wordmatch/bg_score.png" alt="">
+				<div class="dp_flex">Score : <span class="num">0</span></div>
 			</div>
 			<div class="round">
 				<ul class="card_list">
@@ -99,18 +115,32 @@
 			</div>
 			<span class="ico_o"><img src="images/activity/ico_o.png" alt="O"></span>
 			<span class="ico_x"><img src="images/activity/ico_x.png" alt="X"></span>
+			<div class="close_confirm">
+				<div class="confirm_box">
+					<p><img src="images/activity/unscramble/img_confirm.png" alt="Activity를 종료하시겠습니까?​ 지금 Activity를 종료하시면 ​숙제 결과가 저장되지 않아요.​"></p>
+				</div>
+				<a href="javascript:goContinue();" class="btn_continue"><img src="images/activity/btn_continue.png" alt="계속하기"></a>
+				<a href="javascript:goExit();" class="btn_exit"><img src="images/activity/btn_exit.png" alt="나가기"></a>
+			</div>
 			<div class="result_box">
 				<div class="score_box">
 					<p><img src="images/activity/img_clear.png" alt="activity Clear! Score"></p>
 					<strong class="txt_score"><span class="num"></span></strong>
 				</div>
 				<a href="javascript:goRetry();" class="btn_retry"><img src="images/activity/btn_replay.png" alt="다시풀기"></a>
+				<a href="javascript:goExit();" class="btn_exit"><img src="images/activity/btn_exit.png" alt="나가기"></a>
 			</div>
+			<a href="javascript:winClose();" class="btn_close"><img src="images/activity/wordmatch/btn_close.png" alt="닫기"></a>
 		</div>
 	</div>
+	<audio id="myAudio" style="display:none;"></audio>
 </body>
 
 <script type="text/javascript">
+	const urlParams = new URL(location.href).searchParams;
+	const qNum = urlParams.get('qNum');
+	console.log(qNum)
+
 	$(function() {
 		$('.btn_start').click(function () {
 			$('.starter').hide();
@@ -120,10 +150,8 @@
 		//폰트 리사이징
 		function fontResize(){
 			if($('.activity_wrap').width() < $(window).innerWidth() || $('.activity_wrap').height() < $(window).innerHeight()){
-				//$('.a_area a').css('zoom','0.85');
-				//$('.a_area a').css('line-height','1.2');
 				$('.result_box .score_box .txt_score .num').css({'zoom':'0.75'});
-				$('.score .dp_flex .num').css({'line-height':'1.2', 'zoom':'0.65'});
+				$('.score').css({'zoom':'0.85'});
 			}
 		}
 
@@ -136,9 +164,9 @@
 	});
 
 	const cardData = [];
-	const cardImg = ['sample1', 'sample2', 'sample3', 'sample4', 'sample5'];
-	const cardWord = ['ball', 'smile', 'underground', 'marshmallow', 'number'];
-	const setItem = 5; //문제갯수
+		cardImg = ['sample1', 'sample2', 'sample3', 'sample4', 'sample5'];
+		cardWord = ['ball', 'smile', 'underground', 'marshmallow', 'number'];
+		setItem = 1; //문제갯수
 	let openCard =[] //오픈한 카드
 
 	let round = 0;
@@ -159,9 +187,6 @@
 			let randomNumber = getRandom(5, 0);
 
 			// 중복 검사
-			// cardDeckImgArr 안에 random 값이 없다면 cardDeckImgArr에 추가
-			// cardDeckImgArr 안에 random 값이 있으면 인덱스 1 감소
-			
 			if (randomNumberArr.indexOf(randomNumber) === -1) {
 				randomNumberArr.push(randomNumber);
 			} else {
@@ -175,10 +200,6 @@
 
 		// 카드 섞기
 		shuffle(randomNumberArr);
-
-		console.log(randomNumberArr);
-
-		
 
 		// 섞은 값으로 카드 세팅
 		for (let i = 0; i < setItem; i++) {
@@ -195,16 +216,17 @@
 	//카드세팅
 	const gameBoard = document.getElementsByClassName("card_list")[0];
 	function setCard() {
+		$('.card_list').addClass('list_' + setItem);
 		for (let i = 0; i < setItem; i++) {
 			gameBoard.innerHTML = gameBoard.innerHTML +
 			`
 				<li>
-					<a href="javascript:answerCheck('${cardWord[i]}');" data-card="${cardWord[i]}_img">
+					<a href="javascript:answerCheck('${cardWord[i]}', 'img');" data-card="${cardWord[i]}" data-type="img">
 						<img src="images/activity/wordmatch/${cardImg[i]}.png" alt="${cardWord[i]}">
 					</a>
 				</li>
 				<li>
-					<a href="javascript:answerCheck('${cardWord[i]}');" data-card="${cardWord[i]}">
+					<a href="javascript:answerCheck('${cardWord[i]}', 'word');" data-card="${cardWord[i]}" data-type="word">
 						${cardWord[i]}
 					</a>
 				</li>
@@ -225,16 +247,12 @@
 		openCard = [];
 		chk = 0;
 
-		round++;
-
 		if ((round-1) == setItem){
 			setScore();
 			$('.result_box').fadeIn('fast');
 			$('.score_box .txt_score .num').text(score);
 		} else{
 			setScore();
-			//$('.round_' + (round - 1)).hide();
-			//$('.round_' + round).show();
 		}
 	}
 
@@ -248,62 +266,65 @@
 		$('.ico_x').fadeIn('slow');
 		setTimeout(function(){
 			$('.ico_x').hide();
+			$('.card_list li a').not('.clear').removeClass('active');
 			nextRound();
 		}, 2000);
 	}
 
-	
+	//오디오 끝나면 실행
+	function finishAudio(){
+		$('.card_list li a.active').addClass('clear');
+		$('.card_list li a.active').html('<img src="images/activity/wordmatch/img_clear.png" src="CLEAR">');
+		$('.ico_o').hide();
+		nextRound();
+	}
 
-	//정오답체크
-	function answerCheck(name){
+	function answerCheck(card, type){
 		chk ++;
-		$('.card_list li a[data-card='+name+']').addClass('active');
 
-		openCard.push($('.card_list li a').attr('data-card'));
+		var $choiceCard = $('.card_list li a[data-card='+card+'][data-type='+type+']');
+		$choiceCard.addClass('active');
+		openCard.push($choiceCard.attr('data-card'));
+
 		console.log(openCard);
 
 		if(chk == 2){
 			//정답체크
 			if(openCard[0] == openCard[1]){
 				//정답
-				$('.card_list li a.active').removeClass('active').addClass('clear');
-
+				round++;
 				score += 100;
 				$('.ico_o').fadeIn('slow');
-				setTimeout(function(){
-					$('.ico_o').hide();
-					nextRound();
-				}, 2000);
+				var myAudio = document.getElementById("myAudio"); 
+				$('#myAudio').attr({src:'accommodate.mp3', onended:'finishAudio()'});//카드 오디오데이터
+				myAudio.play();
 			}else{
+				//오답
 				wrong();
 			}
 		}
-		
+	}
 
+	//닫기
+	function winClose(){
+		$('.close_confirm').show();
+	}
 
-		/*if($('.round_'+round).find('.a_area a.chk').length < 1){
-			$('.round_'+round).find('.a_area .a_' + num).addClass('chk');
-			$('.round_'+round).find('.a_area .a_' + num).find('img').attr('src','images/activity/ico_chk2.svg');
-		}
-		
-		if($('.round_'+round).find('.a_area').find('.a_' + num).attr('data') == 'answer'){
-			//정답
-			score += 100;
-			$('.ico_o').fadeIn('slow');
-			setTimeout(function(){
-				$('.ico_o').hide();
-				nextRound();
-			}, 2000);
-		} else {
-			//오답
-			wrong();
-		}*/
+	//계속하기
+	function goContinue(){
+		$('.close_confirm').hide();
+	}
+
+	//나가기
+	function goExit(){
+		window.close();
 	}
 
 	//다시하기
 	function goRetry(){
 		round = 0;
 		score = 0;
+		$('.card_list').html('');
 		$('.score .num').text(score);
 		//$('.a_area a.chk').removeClass('chk');
 
