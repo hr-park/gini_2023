@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge ,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Interactive Contents</title>
+	<link rel="canonical" href="" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<!--link rel="shortcut icon" href="favicon.ico">-->
+	<link rel="stylesheet" type="text/css" href="css/NotoSansKR.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/common.js"></script>
+	<style type="text/css">
+	@media screen and (orientation :portrait){
+		html, body{width:100%;height:100%;min-width:100%}
+		.warning{display:table;background:#282830 url(images/activity/img_revert.png) no-repeat 50% 40% / 100% auto;text-align:center;vertical-align:middle;width:100%;height:100%;text-indent:-9999em;}
+		.starter{display:none}
+		.port_wrap{display:none}
+		.activity_wrap{display:none;}
+	}
+	@media screen and (orientation :landscape){
+		html, body{background-color:#000;height:100%;vertical-align:middle;overflow:hidden;}
+		.warning{display:none;}
+		.starter{overflow:hidden;position:absolute;margin:0 auto;display:inline-block;text-align:center;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
+		.starter a{display:block;position:absolute;left:36.09%;bottom:11.11%;width:27.81%;z-index:150}
+		.btn_retry a{display:block;position:fixed;left:50%;top:50%;width:17.54%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
+		.ico_o, .ico_x, .result_box, .close_confirm{display:none;position:fixed;left:0;top:0;z-index:200;}
+
+		.activity_wrap{display:none;position:absolute;margin:0 auto;text-align:center;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);overflow:hidden;}
+		./*round{display:none;position:absolute;left:0;top:0;width:100%;height:100%;}*/
+		.main_bg{max-width:100%;max-height:100%;text-align:center;position:relative;}
+		.main_bg img{vertical-align:middle;text-align:center;max-width:100vw;max-height:calc(var(--vh, 1vh) * 100);width:auto;}
+
+		.score{position:absolute;left:8.59%;top:8.19%;width:16.01%;display:flex;align-items:center;font-size:2.03vw;color:#000;font-weight:700;letter-spacing:-.02em;}
+		.score .dp_flex{displa}
+		.score .dp_flex{position:absolute;left:0;top:0;display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding-left:5.36%;box-sizing:border-box}
+		.score .num{display:inline-block;margin-left:3.9%;font-size:2.03vw;}
+
+		.card_list{position:absolute;left:50%;top:24.3%;display:flex;flex-wrap:wrap;width:81.25%;height:51.38%;transform:translate(-50%, 0)}
+		.card_list li{width:20%;height:50%;padding:0.39%;}
+		.card_list.list_4{width:64.84%;height:51.38%;}
+		.card_list.list_4 li{width:25%;}
+		.card_list.list_4 li a{font-size:1.562vw}
+		.card_list.list_3{top:21.52%;width:76.562%;height:56.94%;}
+		.card_list.list_3 li{width:33.33%;}
+		.card_list.list_2 li a{font-size:2.34vw;}
+		.card_list.list_2{top:21.52%;width:57.03%;height:56.94%;}
+		.card_list.list_2 li{width:50%;}
+		.card_list.list_2 li a{font-size:3.125vw;}
+		.card_list.list_1{top:25%;width:63.28%;height:50%;}
+		.card_list.list_1 li{width:50%;height:100%;}
+		.card_list.list_1 li a{font-size:3.125vw;}
+		.card_list li img{max-height:100%;}
+		.card_list li a{position:relative;display:inline-flex;width:100%;height:100%;align-items:center;justify-content:center;background:#fff;color:#000;font-size:1.5625vw;font-weight:700}
+		.card_list li a.active{pointer-events:none;}
+		.card_list li a.active:after{content:'';position:absolute;left:0;top:0;z-index:1;display:block;width:100%;height:100%;background:rgba(85, 124, 242, .2);border:0.46vw solid #557CF2;box-sizing:border-box;}
+		.card_list li a.clear{background:#557CF2}
+		.card_list li a.clear img{width:58%;}
+		.card_list li a.clear:after{background:none;border-color:#fff}
+		.card_list.list_3 li a.clear img{width:43.43%;}
+		.card_list.list_2 li a.clear img{width:38.61%;}
+		.card_list.list_1 li a.clear img{width:52%;}
+
+		.close_confirm{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
+		.close_confirm .confirm_box{position:absolute;left:50%;top:13.88%;width:53.125%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
+		.close_confirm .btn_continue{position:absolute;left:50%%;top:64.16%;width:31.48%;margin-left:-33.08%;}
+		.close_confirm .btn_exit{position:absolute;left:50%;top:64.16%;width:31.48%;}
+
+		.result_box{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
+		.result_box .score_box{position:absolute;left:50%;top:4.16%;width:53.12%;height:61.11%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
+		.result_box .score_box .txt_score{position:absolute;left:50%;top:27.27%;width:35.29%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);border-radius:50%;}
+		.result_box .score_box .txt_score:before{content:'';display:block;padding-top:100%;}
+		.result_box .score_box .txt_score .num{position:absolute;left:0;top:0;right:0;bottom:0;display:flex;justify-content:center;padding-top:45.91%;color:#FFC85F;font-family:'yg-jalnan';font-size:6.87vw;letter-spacing:-0.02em;box-sizing:border-box;}
+		.result_box .btn_retry{position:absolute;left:50%;top:71.11%;width:31.48%;margin-left:-33.08%;}
+		.result_box .btn_exit{position:absolute;left:50%;top:71.11%;width:31.48%;}
+		.btn_close{position:absolute;right:1.64%;top:6.11%;width:7.03%;}
+	}
+	</style>
+</head>
+<body>
+	<div class="warning">이 페이지는 가로 보기에 최적화 되어 있습니다. 기기를 회전하여 주세요.</div>
+	<div class="starter">
+		<div class="main_bg">
+			<img src="images/activity/wordmatch/main_match.jpg" alt="그림에 맞는 정답을 맞춰보세요.">
+		</div>
+		<a href="javascript://" class="btn_start"><img src="images/activity/wordmatch/btn_play.png" alt="PLAY" /></a>
+	</div>
+	<div class="port_wrap">
+		<div class="activity_wrap">
+			<div class="main_bg">
+				<img src="images/activity/wordmatch/bg_match.jpg" alt="WORD MATCH">
+			</div>
+			<div class="score">
+				<img src="images/activity/wordmatch/bg_score.png" alt="">
+				<div class="dp_flex">Score : <span class="num">0</span></div>
+			</div>
+			<div class="round">
+				<ul class="card_list">
+				</ul>
+			</div>
+			<span class="ico_o"><img src="images/activity/ico_o.png" alt="O"></span>
+			<span class="ico_x"><img src="images/activity/ico_x.png" alt="X"></span>
+			<div class="close_confirm">
+				<div class="confirm_box">
+					<p><img src="images/activity/unscramble/img_confirm.png" alt="Activity를 종료하시겠습니까?​ 지금 Activity를 종료하시면 ​숙제 결과가 저장되지 않아요.​"></p>
+				</div>
+				<a href="javascript:goContinue();" class="btn_continue"><img src="images/activity/btn_continue.png" alt="계속하기"></a>
+				<a href="javascript:goExit();" class="btn_exit"><img src="images/activity/btn_exit.png" alt="나가기"></a>
+			</div>
+			<div class="result_box">
+				<div class="score_box">
+					<p><img src="images/activity/img_clear.png" alt="activity Clear! Score"></p>
+					<strong class="txt_score"><span class="num"></span></strong>
+				</div>
+				<a href="javascript:goRetry();" class="btn_retry"><img src="images/activity/btn_replay.png" alt="다시풀기"></a>
+				<a href="javascript:goExit();" class="btn_exit"><img src="images/activity/btn_exit.png" alt="나가기"></a>
+			</div>
+			<a href="javascript:winClose();" class="btn_close"><img src="images/activity/wordmatch/btn_close.png" alt="닫기"></a>
+		</div>
+	</div>
+	<audio id="myAudio" style="display:none;"></audio>
+</body>
+
+<script type="text/javascript">
+	//퍼블
+	let para = getParameter('qNum');
+
+	function getParameter(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+	//퍼블 후 삭제
+
+	$(function() {
+		$('.btn_start').click(function () {
+			$('.starter').hide();
+			start();
+		});
+		
+		//폰트 리사이징
+		function fontResize(){
+			if($('.activity_wrap').width() < $(window).innerWidth() || $('.activity_wrap').height() < $(window).innerHeight()){
+				$('.result_box .score_box .txt_score .num').css({'zoom':'0.75'});
+				$('.score').css({'zoom':'0.85'});
+			}
+		}
+
+		fontResize();
+
+		$(window).resize(function(){
+			fontResize();
+		});
+		
+	});
+
+	const cardData = [];
+		cardImg = ['sample1', 'sample2', 'sample3', 'sample4', 'sample5'];
+		cardWord = ['ball', 'smile', 'underground', 'marshmallow', 'number'];
+		setItem = para; //문제갯수
+
+	let openCard =[] //오픈한 카드
+
+	let round = 0;
+		score = 0;
+		chk = 0;
+
+	function start(){
+		round++;
+		$('.starter').hide();
+		$('.activity_wrap').show();
+		$('.round').show();
+		
+
+		let randomNumberArr = [];
+
+		//카드 세팅
+		for (let i = 0; i < setItem; i++) {
+			cardData.push({card: cardImg[randomNumberArr[i]]});
+			cardData.push({card: cardWord[randomNumberArr[i]]});
+		}
+
+		setCard();
+
+		return cardData;
+		
+	}
+	
+	//카드생성
+	const gameBoard = document.getElementsByClassName("card_list")[0];
+	function setCard() {
+		$('.card_list').addClass('list_' + setItem);
+		for (let i = 0; i < setItem; i++) {
+			gameBoard.innerHTML = gameBoard.innerHTML +
+			`
+				<li>
+					<a href="javascript:answerCheck('${cardWord[i]}', 'img');" data-card="${cardWord[i]}" data-type="img">
+						<img src="images/activity/wordmatch/${cardImg[i]}.png" alt="${cardWord[i]}">
+					</a>
+				</li>
+				<li>
+					<a href="javascript:answerCheck('${cardWord[i]}', 'word');" data-card="${cardWord[i]}" data-type="word">
+						${cardWord[i]}
+					</a>
+				</li>
+
+			`;
+		}
+		cardRnd();
+	}
+	
+	//카드랜덤처리
+	function cardRnd(){
+		var grd = $('.card_list');
+		var imgs = grd.children();
+
+		imgs.sort(function(){
+			return (Math.round(Math.random()) - 0.5);
+		});
+		grd.remove('li');
+
+		for(var i=0; i < imgs.length; i++)grd.append(imgs[i]);
+	}
+
+	function nextRound(){
+		openCard = [];
+		chk = 0;
+
+		if ((round-1) == setItem){
+			setScore();
+			$('.result_box').fadeIn('fast');
+			$('.score_box .txt_score .num').text(score);
+		} else{
+			setScore();
+		}
+	}
+
+	function setScore(){
+		$('.score .num').text(score);
+	}
+
+	//오답
+	function wrong(){
+		score -= 10;
+		$('.ico_x').fadeIn('slow');
+		setTimeout(function(){
+			$('.ico_x').hide();
+			$('.card_list li a').not('.clear').removeClass('active');
+			nextRound();
+		}, 2000);
+	}
+
+	//오디오 끝나면 실행
+	function finishAudio(){
+		$('.card_list li a.active').addClass('clear');
+		$('.card_list li a.active').html('<img src="images/activity/wordmatch/img_clear.png" src="CLEAR">');
+		$('.ico_o').hide();
+		nextRound();
+	}
+
+	function answerCheck(card, type){
+		chk ++;
+
+		var $choiceCard = $('.card_list li a[data-card='+card+'][data-type='+type+']');
+		$choiceCard.addClass('active');
+		openCard.push($choiceCard.attr('data-card'));
+
+		if(chk == 2){
+			//정답체크
+			if(openCard[0] == openCard[1]){
+				//정답
+				round++;
+				score += 100;
+				$('.ico_o').fadeIn('slow');
+				var myAudio = document.getElementById("myAudio"); 
+				$('#myAudio').attr({src:'audio/accommodate.mp3', onended:'finishAudio()'});//카드 오디오데이터
+				myAudio.play();
+			}else{
+				//오답
+				wrong();
+			}
+		}
+	}
+
+	//닫기
+	function winClose(){
+		$('.close_confirm').show();
+	}
+
+	//계속하기
+	function goContinue(){
+		$('.close_confirm').hide();
+	}
+
+	//나가기
+	function goExit(){
+		window.close();
+	}
+
+	//다시하기
+	function goRetry(){
+		round = 0;
+		score = 0;
+		$('.card_list').html('');
+		$('.score .num').text(score);
+
+		$('.result_box, .round').hide();
+		start();
+	}
+
+	</script>
+</html>
