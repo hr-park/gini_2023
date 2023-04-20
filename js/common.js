@@ -66,3 +66,36 @@ function closePop(id) {
 	$('.dim').hide();
 	$('#'+ id).hide();
 }
+
+//운영섭카피
+function GetTodayDate(format)
+{
+	if (format == "yyyyMMdd")
+	{
+		var today = new Date();
+		var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		var day = ('0' + today.getDate()).slice(-2);
+		var todayStr = year + month + day;
+		return todayStr;
+	}
+	else
+	{
+		var today = new Date();
+		var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		var day = ('0' + today.getDate()).slice(-2);
+		var todayStr = year + '-' + month + '-' + day;
+		return todayStr;
+	}
+}
+function AddDays(date, addDays)
+{
+	var date = new Date(date);
+	date.setDate(date.getDate() + addDays);
+	var year = date.getFullYear();
+	var month = ('0' + (date.getMonth() + 1)).slice(-2);
+	var day = ('0' + date.getDate()).slice(-2);
+	var dateStr = year + '-' + month + '-' + day;
+	return dateStr;
+}
