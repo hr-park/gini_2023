@@ -44,20 +44,20 @@
 		.main_bg{max-width:100%;max-height:100%;text-align:center;position:relative;}
 		.main_bg img{vertical-align:middle;text-align:center;max-width:100vw;max-height:calc(var(--vh, 1vh) * 100);width:auto;}
 
-		#q_num{position:absolute;left:18.75%;top:5%;z-index:10;width:6.40%;font-weight:900;font-size:1.56vw;color:#fff}
+		#q_num{position:absolute;left:1.56%;top:2.77%;z-index:10;width:6.25%;font-weight:900;font-size:1.56vw;color:#000}
 		#q_num .dp_flex{position:absolute;left:0;top:0%;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
 
 		.warmup_slide{position:absolute;left:0;top:0;width:100%;height:100%;}
-		.warmup_slide .swiper-slide > .bg_img{position:absolute;left:12.96%;top:11.11%;width:74.06%;height:77.77%;}
-		.warmup_slide .swiper-slide .img_box{position:relative;left:50%;top:18.055%;max-width:50%;height:50%;transform:translate(-50%, 0);}
+		.warmup_slide .swiper-slide > .bg_img{position:absolute;/*left:12.96%;*/left:50%;top:50%;/*top:11.11%;*/width:76.56%;/*height:75%;*/transform:translate(-50%, -50%);}
+		.warmup_slide .swiper-slide .img_box{position:relative;left:50%;/*top:22.22%;*/top:50%;max-width:50%;height:50%;transform:translate(-50%, -50%);}
 		.warmup_slide .swiper-slide .img_box img{position:absolute;max-width:100%;max-height:100%;width:auto;height:auto;margin:auto;top:0;bottom:0;left:0;right:0;}
-		.warmup_slide .swiper-slide .txt_box{position:absolute;left:50%;top:68.83%;display:flex;justify-content:center;width:74.06%;height:11.52%;transform:translate(-50%, 0);}
+		.warmup_slide .swiper-slide .txt_box{position:absolute;left:50%;top:50%;display:flex;justify-content:center;align-items:center;width:74.06%;transform:translate(-50%, -50%);}
 		.warmup_slide .swiper-slide .txt_box .audio_box{position:relative;display:inline-block;}
-		.warmup_slide .swiper-slide .txt_box .btn_listening{display:inline-flex;width:8.43%;margin-left:1.56%;}
-		.warmup_slide .swiper-slide .txt_box .txt{font-size:4.375vw;color:#000;font-weight:700;line-height:1.4;}
-		.warmup_slide .swiper-slide .txt_play_info{display:none;position:absolute;left:12.96%;bottom:11.52%;width:33.75%;}
-		.warmup_slide .btn_prev{display:none;position:absolute;left:1.56%;top:50%;z-index:100;width:4.06%;transform:translate(0, -50%);border:0 none;background:red}
-		.warmup_slide .btn_next{position:absolute;right:1.56%;top:50%;z-index:100;width:4.06%;transform:translate(0, -50%);border:0 none;background:red}
+		.warmup_slide .swiper-slide .txt_box .btn_listening{display:inline-block;width:9.375%;margin-left:1.56%;}
+		.warmup_slide .swiper-slide .txt_box .txt{display:inline-block;font-size:6.875vw;color:#000;font-weight:700;word-break:break-word;}
+		.warmup_slide .swiper-slide .txt_play_info{display:none;position:absolute;left:12.96%;top:56.11%;width:25%;}
+		.warmup_slide .btn_prev{display:none;position:absolute;left:1.56%;top:50%;z-index:100;width:4.06%;transform:translate(0, -50%);}
+		.warmup_slide .btn_next{position:absolute;right:1.56%;top:50%;z-index:100;width:4.06%;transform:translate(0, -50%);}
 
 
 		.close_confirm{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
@@ -70,6 +70,14 @@
 		.result_box .btn_retry{position:absolute;left:50%;top:71.11%;width:31.48%;margin-left:-33.08%;}
 		.result_box .btn_exit{position:absolute;left:50%;top:71.11%;width:31.48%;}
 		.btn_close{position:absolute;right:1.56%;top:2.77%;z-index:10;width:7.03%;}
+	}
+
+	@media screen and (orientation :landscape) and  (max-width:812px){
+		.warmup_slide .swiper-slide .txt_box .txt{font-size:4.92vw}
+		.warmup_slide .btn_prev{left:2.46%;width:3.81%}
+		.warmup_slide .btn_next{right:2.46%;width:3.81%}
+		.warmup_slide .swiper-slide .txt_play_info{width:34.48%}
+		.btn_close{width:5.91%}
 	}
 	</style>
 </head>
@@ -91,8 +99,8 @@
 					<div class="swiper-wrapper">
 						<!-- 리스트 생성 -->
 					</div>
-					<button type="button" class="btn_prev"><img src="images/activity/wordflash/btn_prev.png" alt="이전 슬라이드로 이동"></button>
-					<button type="button" class="btn_next"><img src="images/activity/wordflash/btn_next.png" alt="다음 슬라이드로 이동"></button>
+					<a href="javascript://" class="btn_prev"><img src="images/activity/wordflash/btn_prev.png" alt="이전 슬라이드로 이동"></a>
+					<a href="javascript://" class="btn_next"><img src="images/activity/wordflash/btn_next.png" alt="다음 슬라이드로 이동"></a>
 				</div>
 			</div>
 			<div class="close_confirm">
@@ -139,6 +147,11 @@
 			wordImg:'images/activity/warmup/img_sample2.jpg',
 			audioFile:'audio/accommodate.mp3'
 		},
+		{
+			wordTxt:'congratulation',
+			wordImg:'images/activity/warmup/img_sample1.jpg',
+			audioFile:'audio/accommodate.mp3'
+		},
 	];
 
 	let round = 0;
@@ -161,18 +174,25 @@
 		for (let i = 0; i < mainData.length; i++) {
 			slideBoard.innerHTML = slideBoard.innerHTML +
 			`
-				<div class="swiper-slide">
+				<div class="swiper-slide img">
 					<img src="images/activity/wordflash/bg_slide.png" class="bg_img" alt="">
 					<div id="q_num">
 						<img src="images/activity/wordflash/bg_q_num.png" alt="">
 						<span class="dp_flex">#<span class="num">0${[i+1]}</span></span>
 					</div>
 					<div class="img_box"><img src="${mainData[i].wordImg}" alt="${mainData[i].wordTxt}"></div>
+				</div>
+				<div class="swiper-slide txt">
+					<img src="images/activity/wordflash/bg_slide.png" class="bg_img" alt="">
+					<div id="q_num">
+						<img src="images/activity/wordflash/bg_q_num.png" alt="">
+						<span class="dp_flex">#<span class="num">0${[i+1]}</span></span>
+					</div>
 					<div class="txt_box">
 						<p class="txt">${mainData[i].wordTxt}</p>
-						<a href="javascript:mp3Play(${[i]});" class="btn_listening"><img src="images/activity/warmup/btn_listening.png" alt="음원 플레이"></a>
+						<a href="javascript:mp3Play(${[i]});" class="btn_listening"><img src="images/activity/wordflash/btn_listening.png" alt="음원 플레이"></a>
 					</div>
-					<p class="txt_play_info"><img src="images/activity/warmup/img_play_info.png" alt="최초 음원 재생 1회 후 다음으로 넘어갈 수 있어요."></p>
+					<p class="txt_play_info"><img src="images/activity/wordflash/img_play_info.png" alt="최초 음원 재생 1회 후 다음으로 넘어갈 수 있어요."></p>
 				</div>
 
 			`;
@@ -214,22 +234,26 @@
 			if($('.swiper-slide-active.play_finish').length > 0){
 				audioPlay = 1;
 			}
-			
-			if(audioPlay == 1){
-				//오디오 들은 상태
-				if(lastSlide == 1){
-					//마지막문제
-					$('.result_box').fadeIn('fast');
+
+			if($('.swiper-slide-active.txt').length > 0){
+				if(audioPlay == 1){
+					//오디오 들은 상태
+					if(lastSlide == 1){
+						//마지막문제
+						$('.result_box').fadeIn('fast');
+					}else{
+						//다음문제로
+						round++;
+						swiper.slideNext();
+					}
 				}else{
-					//다음문제로
-					round++;
-					swiper.slideNext();
+					//오디오 안들은 상태
+					audioSetBlink();
+					txtPosSet();
+					$('.swiper-slide-active').find('.txt_play_info').show();
 				}
-			}else{
-				//오디오 안들은 상태
-				audioSetBlink();
-				txtPosSet();
-				$('.swiper-slide-active').find('.txt_play_info').show();
+			} else{
+				swiper.slideNext();
 			}
 		});
 	}
@@ -240,8 +264,13 @@
 
 	function txtPosSet(){
 		$('.btn_listening').each(function(index, item){
-			var btnAudioW = $('.btn_listening').width() / 2;
-			$(item).parents('.swiper-slide').find('.txt_play_info').css('left', ($(item).position().left - btnAudioW)+'px');
+			if($(window).innerWidth() > 812){
+				var btnAudioW = $('.btn_listening').width() / 2;
+				$(item).parents('.swiper-slide').find('.txt_play_info').css('left', ($(item).position().left + btnAudioW)+ 'px');
+			}else{
+				var btnAudioW = $('.btn_listening').width() / 2;
+				$(item).parents('.swiper-slide').find('.txt_play_info').css('left', ($(item).position().left - btnAudioW) + 'px');
+			}
 		});
 	}
 
@@ -261,9 +290,9 @@
 	//듣기버튼유도
 	function audioSetBlink(){
 		function blink(){
-			$('.swiper-slide-active').find('.btn_listening img').attr('src','images/activity/warmup/btn_listening2.png');
+			$('.swiper-slide-active').find('.btn_listening img').attr('src','images/activity/wordflash/btn_listening2.png');
 			setTimeout(function(){
-				$('.swiper-slide-active').find('.btn_listening img').attr('src','images/activity/warmup/btn_listening.png');
+				$('.swiper-slide-active').find('.btn_listening img').attr('src','images/activity/wordflash/btn_listening.png');
 			}, 400);
 		}
 
