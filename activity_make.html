@@ -49,24 +49,62 @@
 				<div class="inner">
 					<h2>나만의 학습 Activity 만들기</h2>
 					<div class="activity_make">
-						<div>
+						<div class="disabled">
 							<div class="img_box"><img src="images/activity/main_quiz.png" alt=""></div>
 							<dl>
-								<dt>Quiz show</dt>
+								<dt>QUIZ SHOW</dt>
 								<dd>퀴즈의 정답을 맞춰보세요.</dd>
 							</dl>
 							<a href="#" class="btn_sm bg_blue btn_make">Activity 만들기</a>
-							<a href="#" class="btn_pop" onclick="javascript:openPop('pop_quiz_show');">dddd</a>
+							<a href="#" class="btn_pop" onclick="javascript:openPop('pop_quiz_show');"></a>
 						</div>
 						<div>
 							<div class="img_box"><img src="images/activity/main_blank.png" alt=""></div>
 							<dl>
-								<dt>Fill in the blank</dt>
+								<dt>FILL IN THE BLANK</dt>
 								<dd>빈 칸의 단어를 채워보세요.</dd>
 							</dl>
 							<a href="#" class="btn_sm bg_blue btn_make">Activity 만들기</a>
-							<a href="#" class="btn_pop" onclick="javascript:openPop('pop_fill_blank');">dddd</a>
+							<a href="#" class="btn_pop" onclick="javascript:openPop('pop_fill_blank');"></a>
 						</div>
+						<!-- 액티비티 리스트 추가 20230423 -->
+						<div>
+							<div class="img_box"><img src="images/main_warmup.jpg" alt="WARM UP"></div>
+							<dl>
+								<dt>WARM UP</dt>
+								<dd>그림과 단어를 한 번에 보고 공부해보세요.​</dd>
+							</dl>
+							<a href="#" class="btn_sm bg_blue btn_make">Activity 만들기</a>
+							<a href="#" class="btn_pop" onclick="javascript:openPop('pop_warm_up');"></a>
+						</div>
+						<div>
+							<div class="img_box"><img src="images/main_wordflash.jpg" alt="WORD FLASH"></div>
+							<dl>
+								<dt>WORD FLASH</dt>
+								<dd>그림을 보고 단어를 공부해보세요.​</dd>
+							</dl>
+							<a href="#" class="btn_sm bg_blue btn_make">Activity 만들기</a>
+							<a href="#" class="btn_pop" onclick="javascript:openPop('pop_word_flash');"></a>
+						</div>
+						<div>
+							<div class="img_box"><img src="images/main_wordmatch.jpg" alt="WORD MATCH"></div>
+							<dl>
+								<dt>WORD MATCH</dt>
+								<dd>그림에 맞는 정답을 맞춰보세요​​</dd>
+							</dl>
+							<a href="#" class="btn_sm bg_blue btn_make">Activity 만들기</a>
+							<a href="#" class="btn_pop" onclick="javascript:openPop('pop_word_match');"></a>
+						</div>
+						<div>
+							<div class="img_box"><img src="images/main_unscramble​.jpg" alt="UNSCRAMBLE"></div>
+							<dl>
+								<dt>UNSCRAMBLE</dt>
+								<dd>문장의 순서를 맞춰보세요​​​</dd>
+							</dl>
+							<a href="#" class="btn_sm bg_blue btn_make">Activity 만들기</a>	
+							<a href="#" class="btn_pop" onclick="javascript:openPop('pop_unscramble');"></a>
+						</div>
+						<!--// 액티비티 리스트 추가 20230423 -->
 					</div>
 				</div>
 			</div>
@@ -74,7 +112,7 @@
 			<!-- pop_quiz_show -->
 			<div id="pop_quiz_show" class="pop_wrap pop_activity">
 				<div class="pop_head">
-					<p class="tit">Quiz Show</p>
+					<p class="tit">Quiz show</p>
 					<button type="button" onclick="javascript:closePop('pop_quiz_show');" class="btn_pop_close">팝업닫기</button>
 				</div>
 				<!-- pop_cont -->
@@ -99,6 +137,62 @@
 				<!--// pop_cont -->
 			</div>
 			<!--// pop_fill_blank -->
+			<!-- pop_warm_up -->
+			<div id="pop_warm_up" class="pop_wrap pop_activity">
+				<div class="pop_head">
+					<p class="tit">WARM UP</p>
+					<button type="button" onclick="javascript:closePop('pop_warm_up');" class="btn_pop_close">팝업닫기</button>
+				</div>
+				<!-- pop_cont -->
+				<div class="pop_cont">
+					<div class="img_box"><img src="images/activity/warmup/main.jpg" alt="WARM UP"></div>
+					<p class="txt_info">그림과 단어를 한 번에 보고 공부해보세요!</p>
+				</div>
+				<!--// pop_cont -->
+			</div>
+			<!--// pop_warm_up -->
+			<!-- pop_word_flash -->
+			<div id="pop_word_flash" class="pop_wrap pop_activity">
+				<div class="pop_head">
+					<p class="tit">WORD FLASH</p>
+					<button type="button" onclick="javascript:closePop('pop_word_flash');" class="btn_pop_close">팝업닫기</button>
+				</div>
+				<!-- pop_cont -->
+				<div class="pop_cont">
+					<div class="img_box"><img src="images/activity/wordflash/main.jpg" alt="WORD FLASH"></div>
+					<p class="txt_info">그림을 보고 단어를 공부해보세요!​</p>
+				</div>
+				<!--// pop_cont -->
+			</div>
+			<!--// pop_word_flash -->
+			<!-- pop_word_match -->
+			<div id="pop_word_match" class="pop_wrap pop_activity">
+				<div class="pop_head">
+					<p class="tit">WORD MATCH</p>
+					<button type="button" onclick="javascript:closePop('pop_word_match');" class="btn_pop_close">팝업닫기</button>
+				</div>
+				<!-- pop_cont -->
+				<div class="pop_cont">
+					<div class="img_box"><img src="images/activity/wordmatch/main_match.jpg" alt="WORD MATCH"></div>
+					<p class="txt_info">그림에 맞는 정답을 맞춰보세요!</p>
+				</div>
+				<!--// pop_cont -->
+			</div>
+			<!--// pop_word_match -->
+			<!-- pop_unscramble -->
+			<div id="pop_unscramble" class="pop_wrap pop_activity">
+				<div class="pop_head">
+					<p class="tit">UNSCRAMBLE</p>
+					<button type="button" onclick="javascript:closePop('pop_unscramble');" class="btn_pop_close">팝업닫기</button>
+				</div>
+				<!-- pop_cont -->
+				<div class="pop_cont">
+					<div class="img_box"><img src="images/activity/unscramble/main_unscramble​.jpg" alt="UNSCRAMBLE"></div>
+					<p class="txt_info">문장의 순서를 맞춰보세요!​</p>
+				</div>
+				<!--// pop_cont -->
+			</div>
+			<!--// pop_unscramble -->
 		</div>
 		<!--// Content -->
 		<!-- Footer -->

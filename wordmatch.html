@@ -172,7 +172,7 @@
 	const cardData = [];
 		cardImg = ['sample1', 'sample2', 'sample3', 'sample4', 'sample5'];
 		cardWord = ['ball', 'smile', 'underground', 'marshmallow', 'number'];
-		setItem = para; //문제갯수
+		setItem = 5; //문제갯수
 
 	let openCard =[] //오픈한 카드
 
@@ -287,7 +287,7 @@
 				round++;
 				score += 100;
 				$('.ico_o').fadeIn('slow');
-				var myAudio = document.getElementById("myAudio"); 
+				var myAudio = document.getElementById("myAudio");
 				$('#myAudio').attr({src:'audio/accommodate.mp3', onended:'finishAudio()'});//카드 오디오데이터
 				myAudio.play();
 			}else{
