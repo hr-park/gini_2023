@@ -56,8 +56,8 @@
 		.warmup_slide .swiper-slide .txt_box .btn_listening{display:inline-flex;width:8.43%;margin-left:1.56%;}
 		.warmup_slide .swiper-slide .txt_box .txt{font-size:4.375vw;color:#000;font-weight:700;line-height:1.4;}
 		.warmup_slide .swiper-slide .txt_play_info{display:none;position:absolute;left:12.96%;bottom:11.52%;width:33.75%;}
-		.warmup_slide .btn_prev{display:none;position:absolute;left:1.56%;top:50%;z-index:100;width:4.06%;transform:translate(0, -50%);border:0 none;background:none}
-		.warmup_slide .btn_next{position:absolute;right:1.56%;top:50%;z-index:100;width:4.06%;transform:translate(0, -50%);border:0 none;background:none}
+		.warmup_slide .btn_prev{display:none;position:absolute;left:1.56%;top:50%;z-index:100;width:4.06%;transform:translate(0, -50%);}
+		.warmup_slide .btn_next{position:absolute;right:1.56%;top:50%;z-index:100;width:4.06%;transform:translate(0, -50%);}
 
 
 		.close_confirm{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
@@ -70,6 +70,11 @@
 		.result_box .btn_retry{position:absolute;left:50%;top:71.11%;width:31.48%;margin-left:-33.08%;}
 		.result_box .btn_exit{position:absolute;left:50%;top:71.11%;width:31.48%;}
 		.btn_close{position:absolute;right:1.56%;top:2.77%;z-index:10;width:7.03%;}
+	}
+
+	@media screen and (orientation :landscape) and  (max-width:812px){
+		.warmup_slide .swiper-slide .txt_box .txt{font-size:3.69vw}
+		.warmup_slide .btn_prev, .warmup_slide .btn_next{width:3.94%}
 	}
 	</style>
 </head>
@@ -91,8 +96,8 @@
 					<div class="swiper-wrapper">
 						<!-- 리스트 생성 -->
 					</div>
-					<button type="button" class="btn_prev"><img src="images/activity/warmup/btn_prev.png" alt="이전 슬라이드로 이동"></button>
-					<button type="button" class="btn_next"><img src="images/activity/warmup/btn_next.png" alt="다음 슬라이드로 이동"></button>
+					<a href="javascript://" class="btn_prev"><img src="images/activity/warmup/btn_prev.png" alt="이전 슬라이드로 이동"></a>
+					<a href="javascript://" class="btn_next"><img src="images/activity/warmup/btn_next.png" alt="다음 슬라이드로 이동"></a>
 				</div>
 			</div>
 			<div class="close_confirm">
