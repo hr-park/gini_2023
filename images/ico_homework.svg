@@ -1,0 +1,11 @@
+<svg id="ico_homework" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 22 22">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#24bcff"/>
+      <stop offset="0.753" stop-color="#557cf2"/>
+      <stop offset="1" stop-color="#557cf2"/>
+    </linearGradient>
+  </defs>
+  <rect id="사각형_22" data-name="사각형 22" width="22" height="22" transform="translate(0)" opacity="0" fill="url(#linear-gradient)"/>
+  <path id="edit_note_FILL1_wght600_GRAD0_opsz48" d="M121.044,325.042V322.53l6.394-6.419,2.5,2.512-6.394,6.419Zm-10.653-6.054v-2.37h9.647v2.37Zm20.822-1.643-2.5-2.512.858-.862a1.212,1.212,0,0,1,1.644,0l.858.862a1.223,1.223,0,0,1,0,1.651l-.858.862Zm-20.822-3.662V311.33h14.476v2.353Zm0-5.288v-2.353h14.476V308.4Z" transform="translate(-110.391 -303.042)" fill="url(#linear-gradient)"/>
+</svg>
