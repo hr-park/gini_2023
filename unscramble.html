@@ -20,22 +20,179 @@
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/common.js"></script>
+	<style type="text/css">
+	:root{
+		--windowW:1280px;
+		--windowH:720;
+		--boardW:1080;
+	}
+	@media screen and (orientation :portrait){
+		html, body{width:100%;height:100%;min-width:100%}
+		.warning{display:table;background:#282830 url(images/activity/img_revert.png) no-repeat 50% 40% / 100% auto;text-align:center;vertical-align:middle;width:100%;height:100%;text-indent:-9999em;}
+		.starter{display:none}
+		.port_wrap{display:none}
+		.activity_wrap{display:none;}
+	}
+	@media screen and (orientation :landscape){
+		html, body{background-color:#000;height:100%;vertical-align:middle;overflow:hidden;}
+		.warning{display:none;}
+		.starter{overflow:hidden;position:absolute;margin:0 auto;display:inline-block;text-align:center;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
+		.starter a{display:block;position:absolute;left:32.34%;top:70.83%;width:35.31%;z-index:150}
+		.btn_retry a{display:block;position:fixed;left:50%;top:50%;width:17.54%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
+		#ico_chance_x, .result_box, .close_confirm{display:none;position:fixed;left:0;top:0;z-index:200;}
+
+		.activity_wrap{display:none;position:absolute;margin:0 auto;text-align:center;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);overflow:hidden;}
+		.round{display:none;overflow-y:auto;position:absolute;left:0;top:0;width:100%;height:100%;padding:3% 0 1.42%;box-sizing:border-box;}
+
+		.main_bg{max-width:100%;max-height:100%;text-align:center;position:relative;}
+		.main_bg img{vertical-align:middle;text-align:center;max-width:100vw;max-height:calc(var(--vh, 1vh) * 100);width:auto;}
+
+		#q_num{position:absolute;right:2.34%;bottom:2.77%;z-index:10;width:6.40%;font-weight:900;font-size:1.87vw;color:#000}
+		#q_num .dp_flex{position:absolute;left:0;top:0%;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+		
+		.q_content{position:absolute;left:0;top:0;width:100%;height:100%}
+
+		.head{position:relative;width:78.125%;margin:0 auto;}
+		.head .score{position:absolute;left:6.6%;top:37%;font-size:1.875vw;color:#fff;font-weight:700;letter-spacing:-.02em;}
+		.head .txt_round_chance{position:absolute;left:26.6%;top:39.39%;width:14%}
+		.head a{position:relative;z-index:10;display:inline-block;width:12%;}
+		.head .btn_hint{position:absolute;right:20.8%;top:16.66%;}
+		.head .btn_reset{position:absolute;right:8%;top:16.66%;background:none}
+		.head .btn_reset:before{display:none}
+		.head .btn_close{position:absolute;right:0;top:0;width:5.82%;}
+		.board{position:relative;width:78.125%;min-height:28.05%;padding:2% 4%;margin:0 auto 3.16%;background:#fff;color:#000;font-weight:700;border:2px solid #565E90;border-top:0 none;box-sizing:border-box}
+		.board.h_full{display:flex;min-height:73%}
+		.board .user_inp{text-align:left}
+		.board .user_inp a{display:inline-block;margin-right:1.4%;color:#000;font-size:2.34vw;line-height:1.3;pointer-events:none;}
+		.board .user_inp a.incorrect{color:red}
+		.board .user_inp .txt_info{position:absolute;left:50%;top:50%;width:100%;color:#C1C1C1;font-weight:700;font-size:2.34vw;text-align:center;transform:translate(-50%, -50%);}
+		
+		.board.h_full .result_inner{width:100%;}
+		.board .result{display:none;}
+		.board.h_full .result{display:flex;flex-direction:column;width:100%;height:100%;}
+		.board .result .ico{display:none;width:14%;margin:0 auto}
+		.board .result .answer{margin:1% 0 3%;font-size:3vw;line-height:3.9vw;font-weight:700;text-align:left;}
+		.board .result .btn_box{margin-top:auto}
+		.board .result .txt_play_info{margin-bottom:1.4%;font-size:1.6vw;line-height:2.3vw;font-weight:400}
+		.board .result a{display:inline-block;width:25%;margin:0 1%;}
+		.item_area{width:78.125%;margin:0 auto;text-align:left;}
+		.item_area a{display:inline-block;margin-bottom:1.58%;margin-right:1.56%;padding:1.17% 2%;background:#565E90;border-radius:8px;color:#fff;font-size:2.18vw;font-weight:700;border:0 none}
+		.item_area a.selected{background:#01D0B0;color:#000;}
+		.item_area a.hint{background:#FFED80;color:#565E90}
+
+		.close_confirm{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
+		.close_confirm .confirm_box{position:absolute;left:50%;top:13.88%;width:53.125%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
+		.close_confirm .btn_continue{position:absolute;left:50%%;top:64.16%;width:31.48%;margin-left:-33.08%;}
+		.close_confirm .btn_exit{position:absolute;left:50%;top:64.16%;width:31.48%;}
+
+		.result_box{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
+		.result_box .score_box{position:absolute;left:50%;top:4.16%;width:53.12%;height:61.11%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
+		.result_box .score_box .txt_score{position:absolute;left:50%;top:27.27%;width:35.29%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);border-radius:50%;}
+		.result_box .score_box .txt_score:before{content:'';display:block;padding-top:100%;}
+		.result_box .score_box .txt_score .num{position:absolute;left:0;top:0;right:0;bottom:0;display:flex;justify-content:center;padding-top:45.91%;color:#FFC85F;font-family:'yg-jalnan';font-size:6.87vw;letter-spacing:-0.02em;box-sizing:border-box;}
+		.result_box .btn_retry{position:absolute;left:50%;top:71.11%;width:31.48%;margin-left:-33.08%;}
+		.result_box .btn_exit{position:absolute;left:50%;top:71.11%;width:31.48%;}
+	}
+	@media screen and (orientation :landscape) and  (max-width:812px){
+		.round{padding:0}
+		.head{width:100%}
+		.head .score{left:8.5%;top:42%;}
+		.board{width:100%;min-height:48%;margin-bottom:2.77%;}
+		.board.h_full{overflow-y:auto;min-height:calc(100% - 10.9%);margin:0}
+		.board .user_inp a{margin-right:0.78%;}
+		.board .user_inp .txt_info{font-size:1.97vw}
+		.item_area{width:90.88%;padding-bottom:1.19%}
+		.item_area a{padding:2%;}
+	}
+	</style>
+</head>
+<body>
+	<div class="warning">이 페이지는 가로 보기에 최적화 되어 있습니다. 기기를 회전하여 주세요.</div>
+	<div class="starter">
+		<div class="main_bg">
+			<img src="images/activity/unscramble/main_unscramble​.jpg" alt="문장의 순서를 맞춰보세요. unscramble">
+		</div>
+		<a href="javascript://" class="btn_start"><img src="images/activity/btn_play.png" alt="PLAY" /></a>
+	</div>
+	<div class="port_wrap">
+		<div class="activity_wrap">
+			<div class="main_bg">
+				<img src="images/activity/unscramble/bg_unscramble​.jpg" alt="Unscramble">
+			</div>
+			<div class="q_content">
+				<span id="q_num">
+					<img src="images/activity/unscramble/bg_q_num.png" alt="">
+					<span class="dp_flex">#<span class="num">01</span></span>
+				</span>
+				<div class="round">
+					<div class="head">
+						<picture>
+							<source media="(max-width:812px)" srcset="images/activity/unscramble/bg_frame_mo.png">
+							<source media="(min-width:813px)" srcset="images/activity/unscramble/bg_frame.png">
+							<img src="images/activity/unscramble/bg_frame.png" alt="">
+						</picture>
+						<div class="score">Score : <span class="num">0</span></div>
+						<div class="txt_round_chance"><img src="images/activity/unscramble/round_chance_3.png" alt="남은 기회"></div>
+						<a href="javascript:hint();" class="btn_hint"><img src="images/activity/unscramble/btn_hint_2.png" alt="HINT"></a>
+						<a href="javascript:setReset();" class="btn_reset"><img src="images/activity/unscramble/btn_reset.png" alt="RESET"></a>
+						<a href="javascript:winClose();" class="btn_close"><img src="images/activity/unscramble/btn_close_frame.png" alt="닫기"></a>
+					</div>
+					<div class="board">
+						<div class="user_inp">
+							<p class="txt_info">아래의 워드 퍼즐을 순서대로 눌러주세요!</p>
+						</div>
+						<div class="result_inner">
+							<div class="result">
+								<div class="ico ico_o"><img src="images/activity/unscramble/ico_o.png" alt="O"></div>
+								<div class="ico ico_x"><img src="images/activity/unscramble/ico_x.png" alt="X"></div>
+								<p class="answer"></p>
+								<div class="btn_box">
+									<p class="txt_play_info">최초 음원 재생 1회 후 다음으로 넘어갈 수 있어요.</p>
+									<a href="javascript:play();" class="btn_listening"><img src="images/activity/unscramble/btn_listening.png" alt="HINT"></a>
+									<a href="javascript:nextRound();" class="btn_next"><img src="images/activity/unscramble/btn_next.png" alt="다음으로"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="item_area"></div> <!-- 라운드 넘어갈때 변경되는 영역 -->
+				</div>
+				<span id="ico_chance_x"><img src="images/activity/ico_x.png" alt="X"></span>
+				<div class="close_confirm">
+					<div class="confirm_box">
+						<p><img src="images/activity/unscramble/img_confirm.png" alt="Activity를 종료하시겠습니까?​ 지금 Activity를 종료하시면 ​숙제 결과가 저장되지 않아요.​"></p>
+					</div>
+					<a href="javascript:goContinue();" class="btn_continue"><img src="images/activity/btn_continue.png" alt="계속하기"></a>
+					<a href="javascript:goExit();" class="btn_exit"><img src="images/activity/btn_exit.png" alt="나가기"></a>
+				</div>
+				<div class="result_box">
+					<div class="score_box">
+						<p><img src="images/activity/img_clear.png" alt="activity Clear! Score"></p>
+						<strong class="txt_score"><span class="num"></span></strong>
+					</div>
+					<a href="javascript:goRetry();" class="btn_retry"><img src="images/activity/btn_replay.png" alt="다시풀기"></a>
+					<a href="javascript:goExit();" class="btn_exit"><img src="images/activity/btn_exit.png" alt="나가기"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<audio id="myAudio" style="display:none;"></audio>
+
 	<script type="text/javascript">
 	const mainData = [
 		{
 			answerSentence:'Do you want some milk?',
 			setWord: ['Do', 'you', 'want', 'some','milk?'],
-			audioFile:'https://file-examples.com/storage/fe9278ad7f642dbd39ac5c9/2017/11/file_example_MP3_1MG.mp3'
+			audioFile:'audio/accommodate.mp3'
 		},
 		{
 			answerSentence:'I pressed a button on the side of my phone to adjust the volume, turned it up to make the music louder, and turned it down to make the music softer I pressed a button on the side of my phone to adjust the volume, turned it up to make the music louder, and turned it down to make the music softer',
 			setWord: ['1I pressed a button', '2on the side of my phone', '3to adjust the volume,', '4turned it up to make the music louder,','5and turned it down to make the music softer'],
-			audioFile:'https://file-examples.com/storage/fe9278ad7f642dbd39ac5c9/2017/11/file_example_MP3_1MG.mp3'
+			audioFile:'audio/accommodate.mp3'
 		},
 		{
 			answerSentence:'Do you want to build a snowman?',
 			setWord: ['Do', 'you', 'want', 'to', 'build', 'a', 'snowman?'],
-			audioFile:'https://file-examples.com/storage/fe9278ad7f642dbd39ac5c9/2017/11/file_example_MP3_1MG.mp3'
+			audioFile:'audio/accommodate.mp3'
 		},
 	];
 
@@ -68,7 +225,7 @@
 	function setQuiz(){
 		//보기 버튼 생성
 		$.each(mainData[round-1].setWord, function(index, element){
-			$('.item_area').append('<a href="javascript://" id="item_'+(index+1)+'" class="item item_'+(index+1)+'"data-turn='+(index+1)+'>'+mainData[round-1].setWord[index]+'</a>');
+			$('.item_area').append('<a href="javascript://" id="item_'+(index+1)+'" class="item item_'+(index+1)+'"data-turn='+(index+1)+'>'+mainData[round-1].setWord[index]+'</a>');//id지워도될듯..
 		});
 		//문제 랜덤
 		let items = $(".item_area .item");
@@ -336,161 +493,5 @@
 	}
 
 	</script>
-	<style type="text/css">
-	:root{
-		--windowW:1280px;
-		--windowH:720;
-		--boardW:1080;
-	}
-	@media screen and (orientation :portrait){
-		html, body{width:100%;height:100%;min-width:100%}
-		.warning{display:table;background:#282830 url(images/activity/img_revert.png) no-repeat 50% 40% / 100% auto;text-align:center;vertical-align:middle;width:100%;height:100%;text-indent:-9999em;}
-		.starter{display:none}
-		.port_wrap{display:none}
-		.activity_wrap{display:none;}
-	}
-	@media screen and (orientation :landscape){
-		html, body{background-color:#000;height:100%;vertical-align:middle;overflow:hidden;}
-		.warning{display:none;}
-		.starter{overflow:hidden;position:absolute;margin:0 auto;display:inline-block;text-align:center;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
-		.starter a{display:block;position:absolute;left:32.34%;top:70.83%;width:35.31%;z-index:150}
-		.btn_retry a{display:block;position:fixed;left:50%;top:50%;width:17.54%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);}
-		#ico_chance_x, .result_box, .close_confirm{display:none;position:fixed;left:0;top:0;z-index:200;}
-
-		.activity_wrap{display:none;position:absolute;margin:0 auto;text-align:center;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);overflow:hidden;}
-		.round{display:none;overflow-y:auto;position:absolute;left:0;top:0;width:100%;height:100%;padding:3% 0 1.42%;box-sizing:border-box;}
-
-		.main_bg{max-width:100%;max-height:100%;text-align:center;position:relative;}
-		.main_bg img{vertical-align:middle;text-align:center;max-width:100vw;max-height:calc(var(--vh, 1vh) * 100);width:auto;}
-
-		#q_num{position:absolute;right:2.34%;bottom:2.77%;z-index:10;width:6.40%;font-weight:900;font-size:1.87vw;color:#000}
-		#q_num .dp_flex{position:absolute;left:0;top:0%;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
-		
-		.q_content{position:absolute;left:0;top:0;width:100%;height:100%}
-
-		.head{position:relative;width:78.125%;margin:0 auto;}
-		.head .score{position:absolute;left:6.6%;top:37%;font-size:1.875vw;color:#fff;font-weight:700;letter-spacing:-.02em;}
-		.head .txt_round_chance{position:absolute;left:26.6%;top:39.39%;width:14%}
-		.head a{position:relative;z-index:10;display:inline-block;width:12%;}
-		.head .btn_hint{position:absolute;right:20.8%;top:16.66%;}
-		.head .btn_reset{position:absolute;right:8%;top:16.66%;background:none}
-		.head .btn_reset:before{display:none}
-		.head .btn_close{position:absolute;right:0;top:0;width:5.82%;}
-		.board{position:relative;width:78.125%;min-height:28.05%;padding:2% 4%;margin:0 auto 3.16%;background:#fff;color:#000;font-weight:700;border:2px solid #565E90;border-top:0 none;box-sizing:border-box}
-		.board.h_full{display:flex;min-height:73%}
-		.board .user_inp{text-align:left}
-		.board .user_inp a{display:inline-block;margin-right:1.4%;color:#000;font-size:2.34vw;line-height:1.3;pointer-events:none;}
-		.board .user_inp a.incorrect{color:red}
-		.board .user_inp .txt_info{position:absolute;left:50%;top:50%;width:100%;color:#C1C1C1;font-weight:700;font-size:2.34vw;text-align:center;transform:translate(-50%, -50%);}
-		
-		.board.h_full .result_inner{}
-		.board .result{display:none;}
-		.board.h_full .result{display:flex;flex-direction:column;width:100%;height:100%;}
-		.board .result .ico{display:none;width:14%;margin:0 auto}
-		.board .result .answer{margin:1% 0 3%;font-size:3vw;line-height:3.9vw;font-weight:700;text-align:left;}
-		.board .result .btn_box{margin-top:auto}
-		.board .result .txt_play_info{margin-bottom:1.4%;font-size:1.6vw;line-height:2.3vw;font-weight:400}
-		.board .result a{display:inline-block;width:25%;margin:0 1%;}
-		.item_area{width:78.125%;margin:0 auto;text-align:left;}
-		.item_area a{display:inline-block;margin-bottom:1.58%;margin-right:1.56%;padding:1.17% 2%;background:#565E90;border-radius:8px;color:#fff;font-size:2.18vw;font-weight:700;border:0 none}
-		.item_area a.selected{background:#01D0B0;color:#000;}
-		.item_area a.hint{background:#FFED80;color:#565E90}
-
-		.close_confirm{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
-		.close_confirm .confirm_box{position:absolute;left:50%;top:13.88%;width:53.125%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
-		.close_confirm .btn_continue{position:absolute;left:50%%;top:64.16%;width:31.48%;margin-left:-33.08%;}
-		.close_confirm .btn_exit{position:absolute;left:50%;top:64.16%;width:31.48%;}
-
-		.result_box{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);z-index:200;}
-		.result_box .score_box{position:absolute;left:50%;top:4.16%;width:53.12%;height:61.11%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);}
-		.result_box .score_box .txt_score{position:absolute;left:50%;top:27.27%;width:35.29%;-webkit-transform:translate(-50%, 0);transform:translate(-50%, 0);border-radius:50%;}
-		.result_box .score_box .txt_score:before{content:'';display:block;padding-top:100%;}
-		.result_box .score_box .txt_score .num{position:absolute;left:0;top:0;right:0;bottom:0;display:flex;justify-content:center;padding-top:45.91%;color:#FFC85F;font-family:'yg-jalnan';font-size:6.87vw;letter-spacing:-0.02em;box-sizing:border-box;}
-		.result_box .btn_retry{position:absolute;left:50%;top:71.11%;width:31.48%;margin-left:-33.08%;}
-		.result_box .btn_exit{position:absolute;left:50%;top:71.11%;width:31.48%;}
-	}
-	@media screen and (orientation :landscape) and  (max-width:812px){
-		.round{padding:0}
-		.head{width:100%}
-		.head .score{left:8.5%;top:42%;}
-		.board{width:100%;min-height:48%;margin-bottom:2.77%;}
-		.board.h_full{overflow-y:auto;min-height:calc(100% - 10.9%);margin:0}
-		.board .user_inp a{margin-right:0.78%;}
-		.board .user_inp .txt_info{font-size:1.97vw}
-		.item_area{width:90.88%;padding-bottom:1.19%}
-		.item_area a{padding:2%;}
-	}
-	</style>
-</head>
-<body>
-	<div class="warning">이 페이지는 가로 보기에 최적화 되어 있습니다. 기기를 회전하여 주세요.</div>
-	<div class="starter">
-		<div class="main_bg">
-			<img src="images/activity/unscramble/main_unscramble​.jpg" alt="문장의 순서를 맞춰보세요. unscramble">
-		</div>
-		<a href="javascript://" class="btn_start"><img src="images/activity/btn_play.png" alt="PLAY" /></a>
-	</div>
-	<div class="port_wrap">
-		<div class="activity_wrap">
-			<div class="main_bg">
-				<img src="images/activity/unscramble/bg_unscramble​.jpg" alt="Unscramble">
-			</div>
-			<div class="q_content">
-				<span id="q_num">
-					<img src="images/activity/unscramble/bg_q_num.png" alt="">
-					<span class="dp_flex">#<span class="num">01</span></span>
-				</span>
-				<div class="round">
-					<div class="head">
-						<picture>
-							<source media="(max-width:812px)" srcset="images/activity/unscramble/bg_frame_mo.png">
-							<source media="(min-width:813px)" srcset="images/activity/unscramble/bg_frame.png">
-							<img src="images/activity/unscramble/bg_frame.png" alt="">
-						</picture>
-						<div class="score">Score : <span class="num">0</span></div>
-						<div class="txt_round_chance"><img src="images/activity/unscramble/round_chance_3.png" alt="남은 기회"></div>
-						<a href="javascript:hint();" class="btn_hint"><img src="images/activity/unscramble/btn_hint_2.png" alt="HINT"></a>
-						<a href="javascript:setReset();" class="btn_reset"><img src="images/activity/unscramble/btn_reset.png" alt="RESET"></a>
-						<a href="javascript:winClose();" class="btn_close"><img src="images/activity/unscramble/btn_close_frame.png" alt="닫기"></a>
-					</div>
-					<div class="board">
-						<div class="user_inp">
-							<p class="txt_info">아래의 워드 퍼즐을 순서대로 눌러주세요!</p>
-						</div>
-						<div class="result_inner">
-							<div class="result">
-								<div class="ico ico_o"><img src="images/activity/unscramble/ico_o.png" alt="O"></div>
-								<div class="ico ico_x"><img src="images/activity/unscramble/ico_x.png" alt="X"></div>
-								<p class="answer"></p>
-								<div class="btn_box">
-									<p class="txt_play_info">최초 음원 재생 1회 후 다음으로 넘어갈 수 있어요.</p>
-									<a href="javascript:play();" class="btn_listening"><img src="images/activity/unscramble/btn_listening.png" alt="HINT"></a>
-									<a href="javascript:nextRound();" class="btn_next"><img src="images/activity/unscramble/btn_next.png" alt="다음으로"></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item_area"></div> <!-- 라운드 넘어갈때 변경되는 영역 -->
-				</div>
-				<span id="ico_chance_x"><img src="images/activity/ico_x.png" alt="X"></span>
-				<div class="close_confirm">
-					<div class="confirm_box">
-						<p><img src="images/activity/unscramble/img_confirm.png" alt="Activity를 종료하시겠습니까?​ 지금 Activity를 종료하시면 ​숙제 결과가 저장되지 않아요.​"></p>
-					</div>
-					<a href="javascript:goContinue();" class="btn_continue"><img src="images/activity/btn_continue.png" alt="계속하기"></a>
-					<a href="javascript:goExit();" class="btn_exit"><img src="images/activity/btn_exit.png" alt="나가기"></a>
-				</div>
-				<div class="result_box">
-					<div class="score_box">
-						<p><img src="images/activity/img_clear.png" alt="activity Clear! Score"></p>
-						<strong class="txt_score"><span class="num"></span></strong>
-					</div>
-					<a href="javascript:goRetry();" class="btn_retry"><img src="images/activity/btn_replay.png" alt="다시풀기"></a>
-					<a href="javascript:goExit();" class="btn_exit"><img src="images/activity/btn_exit.png" alt="나가기"></a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<audio id="myAudio" style="display:none;"></audio>
 </body>
 </html>
