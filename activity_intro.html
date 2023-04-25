@@ -21,33 +21,6 @@
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/common.js"></script>
-	<script>
-		$(function(){
-			//숙제 기간 설정
-			$("#s_date, #e_date").datepicker({
-				dateFormat: "yy-mm-dd",
-			});
-			//숙제 기간, 시간 설정 후 코드발급 팝업 OPEN
-			$('#pop_task_make .btn_code').click(function(){
-				$('#pop_task_make').hide();
-				$('#pop_code').show();
-			});
-		});
-
-		//코드(URL)복사
-		function clip(){
-			var copyText = $('.pop_code .url input').attr('value');
-			var textArea = document.createElement("textarea");
-			textArea.value = copyText;
-			document.body.appendChild(textArea);
-			textArea.select();
-			document.execCommand("Copy");
-			textArea.remove();
-			if($('.pop_code .txt_copy').length < 1){
-				$('.pop_code .url').after('<p class="txt_copy">URL이 복사되었습니다.</p>');
-			}
-		}
-	</script>
 </head>
 <body>
 	<!-- wrap -->
@@ -79,14 +52,31 @@
 				<div class="inner">
 					<div class="view_wrap">
 						<div class="activity_area">
-							<!-- Quiz show -->
+							<!-- Quiz show
 							<img src="images/activity/main_quiz.png" alt="QUIZSHOW">
-							<a href="quiz_show.html" class="btn_play" target="_blank"><img src="images/activity/btn_play.png" alt="시작하기"></a>
+							<a href="quiz_show.html" class="btn_play" target="_blank"><img src="images/activity/btn_play.png" alt="시작하기"></a> -->
 							<!-- Fill in the blank 
 							<img src="images/activity/main_blank.png" alt="Fill in the blank">
 							<a href="javascript://" class="btn_play"><img src="images/activity/btn_play.png" alt="시작하기"></a>-->
+							<!-- unscramble
+							<img src="images/activity/unscramble/main_unscramble​.jpg" alt="unscramble">
+							<a href="javascript://" class="btn_play"><img src="images/activity/btn_play.png" alt="시작하기"></a>-->
+							<!-- warmup
+							<img src="images/activity/warmup/main.jpg" alt="warmup">
+							<a href="javascript://" class="btn_play"><img src="images/activity/btn_play.png" alt="시작하기"></a>-->
+							<!-- wordflash -->
+							<img src="images/activity/wordflash/main.jpg" alt="wordflash">
+							<a href="javascript://" class="btn_play"><img src="images/activity/btn_play.png" alt="시작하기"></a>
+							<!-- wordmatch
+							<img src="images/activity/wordmatch/main_match.jpg" alt="wordmatch">
+							<a href="javascript://" class="btn_play"><img src="images/activity/btn_play.png" alt="시작하기"></a>-->
 						</div>
-						<div class="t_center"><a href="javascript:openPop('pop_task_make');" class="btn_hw_make btn_sm_ico bg_blue">숙제만들기</a></div>
+						<!--<div class="t_center"><a href="javascript:openPop('pop_task_make');" class="btn_hw_make btn_sm_ico bg_blue">숙제만들기</a></div>-->
+						<div class="t_center"><a href="javascript://" class="btn_hw_make btn_lg_ico bg_blue" onclick="OpenHomeworkPop('tempSaveOn');">숙제만들기</a></div> <!-- 운영섭 카피 -->
+						<div class="activity_sch">
+							<p>입력한 콘텐츠를 활용하여 또 다른 Activity를 만들어보세요!​</p>
+							<a href="javascript://" class="btn_sch">Activity 찾아보기</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -100,7 +90,7 @@
 				<!-- pop_cont -->
 				<div class="pop_cont">
 					<div class="tit_box">
-						<input type="text" name="" id="" placeholder="" value="[#제목]">
+						<input type="text" id="homeworkTitle" placeholder="제목을 입력해 주세요." value="[#제목]">
 					</div>
 					<div class="set_area">
 						<dl>
@@ -131,8 +121,8 @@
 				<!--// pop_cont -->
 				<!-- pop_foot -->
 				<div class="pop_foot">
-					<a href="javascript://" class="btn_line mr15">임시저장</a>
-					<a href="javascript://" class="btn_code">코드 발급</a>
+					<a href="javascript://" class="btn_line mr15" id="btnTempSave">임시저장</a>
+					<a href="javascript://" class="btn_code" id="btnSave">코드 발급</a>
 				</div>
 				<!--// pop_foot -->
 			</div>
@@ -150,7 +140,7 @@
 						<dt>URL</dt>
 						<dd>
 							<div class="url">
-								<input type="text" value="Interactive.com/ABCD-1234" readonly>
+								<input type="text" id="homeworkCode" value="Interactive.com/ABCD-1234" readonly>
 								<button type="button" class="btn_copy" onclick="javascript:clip();"></button>
 							</div>
 						</dd>
@@ -173,5 +163,78 @@
 		<!--// Footer -->
 	</div>
 	<!--// wrap -->
+
+	<script type="text/javascript">
+		//운영섭카피
+		function OpenHomeworkPop(mode)
+		{
+			//타이틀 빈값 설정
+			$('#homeworkTitle').val('');
+
+			//시작일, 종료일 기본값 설정
+			var startDate = GetTodayDate();
+			var endDate = AddDays(startDate, 14);
+			$('#s_date').val(startDate);
+			$('#e_date').val(endDate);
+
+			//숙제 1문제당 시간 기본값 체크
+			$("input:radio[name='q_time']:radio[value='20']").prop('checked', true); 
+
+			//임시저장 버튼 노출여부 설정
+			if (mode == 'tempSaveOn')
+			{
+				$('#btnTempSave').show();
+			}
+			else
+			{
+				$('#btnTempSave').hide();
+			}
+
+			//팝업오픈
+			openPop('pop_task_make');
+		}
+
+		function copyInit(){
+			var copyText = $('#homeworkCode').val();
+			var textArea = document.createElement("textarea");
+			textArea.value = copyText;
+			document.body.appendChild(textArea);
+			textArea.select();
+			document.execCommand("Copy");
+			textArea.remove();
+		}
+
+		//코드(URL)발행
+		function clip(){
+			copyInit();
+			if($('.pop_code .txt_copy').length < 1){
+				$('.pop_code .url').after('<p class="txt_copy">URL이 복사되었습니다.</p>');
+			}
+		}
+
+		//코드복사
+		function codeCopy(){
+			copyInit();
+			$('.view_top .txt_copy').css('display','flex');
+		}
+
+		//코드복사문구 히든처리
+		function txtCopyHide(){
+			$('.view_top .txt_copy').hide();
+			
+		}
+
+		$(document).ready(function(){
+			//숙제 기간 설정
+			$("#s_date, #e_date").datepicker({
+				dateFormat: "yy-mm-dd",
+			});
+			//숙제 기간, 시간 설정 후 코드발급 팝업 OPEN
+			$('#pop_task_make .btn_code').click(function(){
+				$('#pop_task_make').hide();
+				$('#pop_code').show();
+			});
+		});
+	</script>
 </body>
 </html>

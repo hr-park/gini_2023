@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge ,chrome=1" />
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">-->
+	<title>Interactive Contents</title>
+	<link rel="canonical" href="" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<!--link rel="shortcut icon" href="favicon.ico">-->
+	<link rel="stylesheet" type="text/css" href="css/NotoSansKR.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/common.js"></script>
+</head>
+<body>
+	<!-- wrap -->
+	<div class="wrap">
+		<!-- Header -->
+		<header>
+			<div class="inner">
+				<h1><a href="javascript://">Interactive Content</a></h1>
+				<div class="util">
+					<span class="user">UserId1234</span>
+					<a href="javascript://">LOGOUT</a>
+				</div>
+			</div>
+		</header>
+		<nav>
+			<div class="inner">
+				<ul>
+					<li class="hw_list on"><a href="#">나의 숙제 리스트</a></li>
+				</ul>
+				<a href="javascript://" class="btn_hw">숙제하기</a>
+			</div>
+		</nav>
+		<!--// Header -->
+		<!-- Content -->
+		<div id="content">
+			<div class="q_tit_area st">
+				<div class="inner">
+					<h2>나의 숙제 리스트​</h2>
+				</div>
+			</div>
+			<div class="inner">
+				<div class="view_wrap">
+					<div class="view_top">
+						<p>숙제 상세 <strong class="act_code color_blue">(ABCD-1234)</strong></p>
+						<!--<a href="javascript:openPop('pop_code');" class="btn_code btn_sm_ico bg_blue">코드발급</a>
+						<a href="javascript:codeCopy();" class="btn_copy btn_sm_ico bg_blue">코드복사</a>-->
+						<div class="txt_copy">
+							<p>코드(URL)이 복사되었습니다.</p>
+							<button type="button" onclick="javascript:txtCopyHide();">닫기</button>
+						</div>
+					</div>
+					<div class="activity_area">
+						<!-- Quiz show 
+						<img src="images/activity/main_quiz.png" alt="QUIZSHOW">
+						<a href="javascript://" class="btn_play"><img src="images/activity/btn_play.png" alt="시작하기"></a>-->
+						<!-- Fill in the blank 
+						<img src="images/activity/main_blank.png" alt="Fill in the blank">
+						<a href="fill_in_the_blank.html" class="btn_play" target="_blank"><img src="images/activity/btn_play.png" alt="시작하기"></a>-->
+						<!-- unscramble
+						<img src="images/activity/unscramble/main_unscramble​.jpg" alt="unscramble">
+						<a href="unscramble.html" class="btn_play" target="_blank"><img src="images/activity/btn_play.png" alt="시작하기"></a>-->
+						<!-- warmup
+						<img src="images/activity/warmup/main.jpg" alt="warmup">
+						<a href="warmup.html" class="btn_play" target="_blank"><img src="images/activity/btn_play.png" alt="시작하기"></a>-->
+						<!-- wordflash -->
+						<img src="images/activity/wordflash/main.jpg" alt="wordflash">
+						<a href="wordflash.html" class="btn_play" target="_blank"><img src="images/activity/btn_play.png" alt="시작하기"></a>
+						<!-- wordmatch
+						<img src="images/activity/wordmatch/main_match.jpg" alt="wordmatch">
+						<a href="wordmatch.html" class="btn_play" target="_blank"><img src="images/activity/btn_play.png" alt="시작하기"></a>-->
+					</div>
+					<table>
+						<colgroup>
+							<col style="width:%;">
+							<col style="width:360px;">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>Activity명(숙제 제목)</th>
+								<th>설정 구분 / 난이도</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- -->
+							<tr>
+								<td>Word Flash<br>20221031_나만의_Quizshow(1)</td>
+								<td class="t_center">나만의 학습Activity / -</td>
+							</tr>
+							<!-- -->
+						</tbody>
+					</table>
+					<table class="mt20">
+						<colgroup>
+							<col style="width:50%">
+							<col style="width:50%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>1 문제 당 시간 / 문제개수</th>
+								<th>숙제 기간</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- -->
+							<tr>
+								<td class="t_center">10초 / 5개</td>
+								<td class="t_center">
+									<span class="ico_status mr5 ing">진행중</span><!-- 진행중 ing, 예정 standby, 종료 end class -->
+									2022.10.19 ~ 2022.10.24
+								</td>
+							</tr>
+							<!-- -->
+						</tbody>
+					</table>
+					<!-- 코드 발급 완료 시-->
+					<p class="tb_tit mt40">숙제 완료 학생</p>
+					<table class="tb_type2">
+						<colgroup>
+							<col style="width:50%">
+							<col style="width:50%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>숙제 스코어</th>
+								<th>숙제 완료 날짜</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- -->
+							<tr>
+								<td class="t_center">320</td>
+								<td class="t_center">2022.10.25</td>
+							</tr>
+							<!-- -->
+							<tr>
+								<td class="t_center">320</td>
+								<td class="t_center">2022.10.25</td>
+							</tr>
+						</tbody>
+					</table>
+					<!--// 코드 발급 완료 시-->
+					<a href="homework_list_st.html" class="btn_md_blue">목록으로</a>
+				</div>
+			</div>
+			<div class="dim"></div>
+		</div>
+		<!--// Content -->
+		<!-- Footer -->
+		<footer>
+			<p>&copy; 2023 Woonjincompass. All Rights Reserved.</p>
+		</footer>
+		<!--// Footer -->
+	</div>
+	<!--// wrap -->
+</body>
+</html>
