@@ -5,11 +5,11 @@ $(function(){
 		let vh = window.innerHeight * 0.01
 		document.documentElement.style.setProperty('--vh', vh + 'px')
 	});
-
+	
 	$(document).on("click", ".inp_field .btn_del", function (e) {
-		$(this).parents('.row').find('input').val('');
+		$(this).parents('div').find('input').val('');//2030425 수정
 		$(this).hide();
-		$(this).parents('.row').removeClass('alert');
+		$(this).parents('div').removeClass('alert');//2030425 수정
 		$('.txt_alert').hide();
 	});
 
@@ -27,31 +27,71 @@ $(function(){
 	});
 	
 
-	//파일선택
-	$(".file_box input[type='file']").on('change',function(){
+	//파일선택(이미지)
+	$(".file_box").not('.audio').find("input[type='file']").on('change',function(){ //20230425 audio 아니면 선택으로 수정
+		console.log('this', $(this));
 		var fileName = $(this).val();
 		var file = $(this).prop("files")[0];
+		console.log('file',file);
 		var blobURL = window.URL.createObjectURL(file);
 
 		if(fileName != ""){
-			var ext = fileName.split('.').pop().toLowerCase(); //확장자분리
-			//아래 확장자가 있는지 체크
+			var ext = fileName.split('.').pop().toLowerCase();
 			if($.inArray(ext, ['jpg','jpeg','gif','png', 'svg']) == -1) {
 				alert('이미지 파일만 업로드 할 수 있습니다.');
 				return;
 			}else{
-				$(this).parent('.file_box').find(".file_name").val(fileName);
-				$(this).parent('.file_box').find(".file_name").attr('readonly',true);
 				if($(this).next('.btn_preview').length < 1){
-					$(this).after('<a href="'+blobURL+'" class="btn_preview" target="_blank">파일 미리보기</a>');
+					$(this).after('<a href="'+blobURL+'" class="btn_preview" target="_blank" onfocus="blur();">파일 미리보기</a>');
+					$('.btn_preview').after('<div class="preview"><img src = "'+blobURL+'"></div>');
 				}else{
 					$(this).next('.btn_preview').attr('href', blobURL);
+					$('.btn_preview').after('<div class="preview"><img src = "'+blobURL+'"></div>');
 				}
 			}
 		}
 	});
 
+	//파일선택(음원) 20230425
+	$(".file_box.audio input[type='file']").on('change',function(){
+		//console.log('this', $(this));
+		var fileName = $(this).val();
+		var file = $(this).prop("files")[0];
+		var blobURL = window.URL.createObjectURL(file);
+		var thisId = $(this).attr('id');
+
+		if(fileName != ""){
+			var ext = fileName.split('.').pop().toLowerCase();
+			if($.inArray(ext, ['mp3']) == -1) {
+				alert('음원(mp4) 만 첨부 가능합니다');
+				return;
+			}else{
+				/*if($(this).next('.btn_audio').length < 1){
+					$(this).after('<a href="'+blobURL+'" class="btn_audio" target="_blank" onfocus="blur();">음원 듣기</a>');
+				}else{
+					$(this).next('.btn_audio').attr('href', blobURL);
+				}*/
+
+				$(this).after('<audio id="q_'+thisId+'" src="'+blobURL+'" style="display:none"></audio>');
+				$(this).after('<a href="javascript:qAudioPlay('+blobURL+')" class="btn_audio">음원 듣기</a>');
+			}
+		}
+	});
+/*
+	$(".btn_audio").click(function(){
+		//var audio2 = new Audio("sound2.mp3");
+		console.log('1');
+		$(this).siblings('audio').play();
+	});*/
+
 });
+
+function qAudioPlay(blobURL){
+	/*let audioFile = new Audio(blobURL);
+	//$('#q_'+id).play();
+	cnosole.log(audioFile);
+	audioFile.play();*/
+}
 
 //팝업 열기
 function openPop(id) {
