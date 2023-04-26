@@ -41,13 +41,14 @@
 						</li>
 					</ul>
 					<a href="javascript://" class="btn_lg bg_white">숙제하기</a>
-					<a href="javascript://" class="btn_lg bg_white">나의 숙제 리스트</a><!-- 버튼 추가 20230423 -->
+					<a href="javascript://" class="btn_lg bg_white btn_hw_list" style="display:none">나의 숙제 리스트</a><!-- 버튼 추가, 학생일때만 노출 20230423 -->
 				</div>
 			</div>
 			<div class="login_wrap">
 				<div class="inner">
 					<!-- 로그인상태 -->
 					<p class="txt_user"><strong>#사용자이름</strong> 선생님 안녕하세요.</p>
+					<p class="txt_user st" style="display:none"><strong>#학생1</strong> 학생 안녕하세요.</p>
 					<a href="javascript://" class="btn_logout">로그아웃</a>
 					<div class="btn_box">
 						<a href="javascript://" class="btn_lg btn_line">학습Activity 만들기</a>
@@ -64,5 +65,26 @@
 		<!--// Footer -->
 	</div>
 	<!--// wrap -->
+	<script>
+	//퍼블
+	let para = getParameter('status');
+
+	function getParameter(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+	
+	$(function(){
+		if(status = 'st'){
+			$('.btn_hw_list').show();
+			$('.login_wrap .btn_lg').hide();
+			$('.txt_user').not('.st').hide();
+			$('.txt_user.st').show();
+		}
+	});
+	//퍼블 후 삭제
+	</script>
 </body>
 </html>
