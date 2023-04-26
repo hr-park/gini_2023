@@ -52,13 +52,26 @@ $(function(){
 		}
 	});
 
-	//파일선택(음원) 20230425
+	//start :: 파일선택(음원) 20230425
+	const audioCnt = $(".file_box.audio input[type='file']").length;
+	if(audioCnt > 0){
+		setPlayer();
+		function setPlayer() {
+			const wrap = document.getElementsByClassName("wrap")[0];
+			for (let i = 0; i < audioCnt; i++) {
+				wrap.innerHTML = wrap.innerHTML +
+				`
+					<audio id="audio_${i+1}" src=""></audio>
+				`;
+			}
+		}
+	}
+
 	$(".file_box.audio input[type='file']").on('change',function(){
-		//console.log('this', $(this));
 		var fileName = $(this).val();
 		var file = $(this).prop("files")[0];
 		var blobURL = window.URL.createObjectURL(file);
-		var thisId = $(this).attr('id');
+		var thisIdx = $(this).attr('data-idx');
 
 		if(fileName != ""){
 			var ext = fileName.split('.').pop().toLowerCase();
@@ -66,31 +79,23 @@ $(function(){
 				alert('음원(mp4) 만 첨부 가능합니다');
 				return;
 			}else{
-				/*if($(this).next('.btn_audio').length < 1){
-					$(this).after('<a href="'+blobURL+'" class="btn_audio" target="_blank" onfocus="blur();">음원 듣기</a>');
-				}else{
-					$(this).next('.btn_audio').attr('href', blobURL);
-				}*/
-
-				$(this).after('<audio id="q_'+thisId+'" src="'+blobURL+'" style="display:none"></audio>');
-				$(this).after('<a href="javascript:qAudioPlay('+blobURL+')" class="btn_audio">음원 듣기</a>');
+				$('#audio_'+thisIdx).attr('src', blobURL);
+				if($(this).next('.btn_audio').length < 1){
+					$(this).after('<a href="javascript:mp3Play('+thisIdx+');" class="btn_audio">음원 듣기</a>');
+				}
 			}
 		}
 	});
-/*
-	$(".btn_audio").click(function(){
-		//var audio2 = new Audio("sound2.mp3");
-		console.log('1');
-		$(this).siblings('audio').play();
-	});*/
-
+	//end :: 파일선택(음원) 20230425
 });
 
-function qAudioPlay(blobURL){
-	/*let audioFile = new Audio(blobURL);
-	//$('#q_'+id).play();
-	cnosole.log(audioFile);
-	audioFile.play();*/
+//음원 미리듣기 20230426
+function mp3Play(idx){
+	$('audio').each( function() {
+		$(this)[0].pause();
+	});
+	var myAudio = document.getElementById('audio_'+idx);
+	myAudio.play();
 }
 
 //팝업 열기
