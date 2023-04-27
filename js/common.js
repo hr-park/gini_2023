@@ -25,7 +25,42 @@ $(function(){
 	$(document).on("click", ".pop_data .menu .list_depth1 > li > a", function (e) {
 		$(this).next('.list_depth2').slideToggle();
 	});
-	
+
+	//start :: 파일선택(음원) 20230425
+	const audioCnt = $(".file_box.audio input[type='file']").length;
+	if(audioCnt > 0){
+		setPlayer();
+		function setPlayer() {
+			const wrap = document.getElementsByClassName("wrap")[0];
+			for (let i = 0; i < audioCnt; i++) {
+				wrap.innerHTML = wrap.innerHTML +
+				`
+					<audio id="audio_${i+1}" src=""></audio>
+				`;
+			}
+		}
+	}
+
+	$(".file_box.audio > input[type='file']").on('change',function(){
+		var fileName = $(this).val();
+		var file = $(this).prop("files")[0];
+		var blobURL = window.URL.createObjectURL(file);
+		var thisIdx = $(this).attr('data-idx');
+
+		if(fileName != ""){
+			var ext = fileName.split('.').pop().toLowerCase();
+			if($.inArray(ext, ['mp3']) == -1) {
+				alert('음원(mp3)만 첨부 가능합니다');
+				return;
+			}else{
+				$('#audio_'+thisIdx).attr('src', blobURL);
+				if($(this).next('.btn_audio').length < 1){
+					$(this).after('<a href="javascript:mp3Play('+thisIdx+');" class="btn_audio">음원 듣기</a>');
+				}
+			}
+		}
+	});
+	//end :: 파일선택(음원) 20230425
 
 	//파일선택(이미지)
 	$(".file_box").not('.audio').find("input[type='file']").on('change',function(){ //20230425 audio 아니면 선택으로 수정
@@ -51,42 +86,6 @@ $(function(){
 			}
 		}
 	});
-
-	//start :: 파일선택(음원) 20230425
-	const audioCnt = $(".file_box.audio input[type='file']").length;
-	if(audioCnt > 0){
-		setPlayer();
-		function setPlayer() {
-			const wrap = document.getElementsByClassName("wrap")[0];
-			for (let i = 0; i < audioCnt; i++) {
-				wrap.innerHTML = wrap.innerHTML +
-				`
-					<audio id="audio_${i+1}" src=""></audio>
-				`;
-			}
-		}
-	}
-
-	$(".file_box.audio input[type='file']").on('change',function(){
-		var fileName = $(this).val();
-		var file = $(this).prop("files")[0];
-		var blobURL = window.URL.createObjectURL(file);
-		var thisIdx = $(this).attr('data-idx');
-
-		if(fileName != ""){
-			var ext = fileName.split('.').pop().toLowerCase();
-			if($.inArray(ext, ['mp3']) == -1) {
-				alert('음원(mp4) 만 첨부 가능합니다');
-				return;
-			}else{
-				$('#audio_'+thisIdx).attr('src', blobURL);
-				if($(this).next('.btn_audio').length < 1){
-					$(this).after('<a href="javascript:mp3Play('+thisIdx+');" class="btn_audio">음원 듣기</a>');
-				}
-			}
-		}
-	});
-	//end :: 파일선택(음원) 20230425
 });
 
 //음원 미리듣기 20230426
