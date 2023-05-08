@@ -66,75 +66,74 @@
 					<a href="javascript://" class="btn_reset btn_md_ico">초기화</a>
 					<a href="javascript:openPop('pop_data');" class="btn_data btn_md_ico">데이터 추가</a>
 				</div>
-				<!-- #문제1 -->
-				<div class="q_card">
-					<p class="q_num">#문제1</p>
-					<div class="inp_field">
-						<label for="">정답(문장) 영역</label>
-						<textarea name="" id="" rows="5">I pressed a button on the side of my phone to adjust the volume, turned it up to make the music louder,and turned it down to make the music softer.</textarea>
-					</div>
-					<div class="flex_box">
+				<div id="q_card_list_uns">
+					<!-- #문제1 -->
+					<div class="q_card" id="q_card_1" data-idx="1">
+						<p class="q_num">#문제 1</p>
 						<div class="inp_field">
-							<label for="">음원 영역</label>
-							<div class="file_box audio">
-								<label for="audio1">음원 선택</label> 
-								<input type="file" id="audio1" data-idx="1">
+							<label for="">정답(문장) 영역</label>
+							<textarea name="" id="answerText" rows="5" placeholder="정답(문장)을 입력하세요"></textarea>
+						</div>
+						<div class="flex_box">
+							<div class="inp_field">
+								<label for="">음원 영역</label>
+								<div class="file_box audio">
+									<label for="audio1">음원 선택</label> 
+									<input type="file" name="file" id="audio1" data-idx="1">
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="inp_field">
-						<label for="">문제(단어) 영역</label>
-						<div class="ex_row">
-							<div class="row">
-								<input type="text" id="" value="I pressed a button">
-								<input type="text" id="" value="on the side of my phone">
-							</div>
-							<div class="row">
-								<input type="text" id="" value="to adjust the volume,">
-								<input type="text" id="" value="turned it up to make the music louder,">
-							</div>
-							<div class="row">
-								<input type="text" id="" value="and turned it down to make the music softer">
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--// #문제1 -->
-				<!-- #문제2 -->
-				<div class="q_card">
-					<p class="q_num">#문제2</p>
-					<div class="inp_field">
-						<label for="">정답(문장) 영역</label>
-						<textarea name="" id="" rows="5"></textarea>
-					</div>
-					<div class="flex_box">
 						<div class="inp_field">
-							<label for="">음원 영역</label>
-							<div class="file_box audio">
-								<label for="audio2">음원 선택</label> 
-								<input type="file" id="audio2" data-idx="2">
+							<!-- 20230508 -->
+							<label for="" class="dp_inline">문제(단어) 영역</label>
+							<p class="sub_txt">Activity 실행 시, 문제(단어)영역은 랜덤으로 노출됩니다</p>
+							<!--// 20230508 -->
+							<div class="ex_row" id="answer">
+								<div class="row">
+									<input type="text" name="section" value="" placeholder="문제(단어)를 입력하세요">
+									<input type="text" name="section" value="" placeholder="문제(단어)를 입력하세요">
+								</div>
+								<div class="row">
+									<input type="text" name="section" value="" placeholder="문제(단어)를 입력하세요">
+									<input type="text" name="section" value="" placeholder="문제(단어)를 입력하세요">
+								</div>
+								<div class="row">
+									<input type="text" name="section" value="" placeholder="문제(단어)를 입력하세요">
+									<button type="button" class="btn_word">문제(단어) 추가</button><!-- 20230508 -->
+								</div>
 							</div>
 						</div>
+						<button type="button" class="btn_q_del" id="btnQuestionDelete_1" onclick="QuestionDelete(this);" style="display:none">문제 지우기</button>
 					</div>
-					<div class="inp_field">
-						<label for="">문제(단어) 영역</label>
-						<div class="ex_row">
-							<div class="row">
-								<input type="text" id="" value="I pressed a button">
-								<input type="text" id="" value="on the side of my phone">
-							</div>
-							<div class="row">
-								<input type="text" id="" value="to adjust the volume,">
-								<input type="text" id="" value="turned it up to make the music louder,">
-							</div>
-							<div class="row">
-								<input type="text" id="" value="and turned it down to make the music softer">
+					<!--// #문제1 -->
+					<!-- #문제2 -->
+					<div class="q_card" id="q_card_2" data-idx="2">
+						<p class="q_num">#문제 2</p>
+						<div class="inp_field">
+							<label for="">정답(문장) 영역</label>
+							<textarea name="" id="answerText" rows="5" placeholder="정답(문장)을 입력하세요">What shall we have for dinner?</textarea>
+						</div>
+						<div class="flex_box">
+							<div class="inp_field">
+								<label for="">음원 영역</label>
+								<div class="file_box audio">
+									<label for="audio2">음원 선택</label> 
+									<input type="file" name="file" id="audio2" data-idx="2">
+									<a href="javascript:mp3Play('2')" class="btn_audio" data-smil="0" data-emil="1949" data-link="http://contents.successtesting.net/19390/QLS1_Ch1_dic1.mp3">음원 듣기</a>
+								</div>
 							</div>
 						</div>
+						<div class="inp_field">
+						   <label for="">문제(단어) 영역</label>
+							<div class="ex_row" id="answer">
+								<div class="row"><input type="text" name="section" value="What shall"><input type="text" name="section" value="we have"></div><div class="row"><input type="text" name="section" value="for dinner?">
+								</div>
+							</div>
+							<button type="button" class="btn_q_del" id="btnQuestionDelete_2" onclick="QuestionDelete(this);" style="display:block">문제 지우기</button>
+						</div>
 					</div>
-					<button type="button" class="btn_q_del">문제 지우기</button>
+					<!--// #문제2 -->
 				</div>
-				<!--// #문제2 -->
 				<a href="javascript://" class="btn_add"><span>문제 추가</span></a>
 				<a href="javascript://" class="btn_md_blue">Activity 실행</a>
 			</div>
@@ -441,4 +440,24 @@
 	</div>
 	<!--// wrap -->
 </body>
+<script type="text/javascript">
+/*s::20230508*/
+$(document).on("click", ".btn_word", function(){
+	const btnWord = '<div class="row"><button type="button" class="btn_word">문제(단어) 추가</button></row>';
+	const inpTag = '<input type="text" placeholder="문제(단어)를 입력하세요" />';
+	var inpTotalCnt = $(this).parents('.ex_row').find('input').length;
+	var inpCnt = $(this).parent('.row').find('input').length;
+
+	if(inpCnt > 0){
+		$(this).parent('.row').append(inpTag);
+		if(inpTotalCnt<8){
+			$(this).parents('.ex_row').append(btnWord);
+		}
+		$(this).remove();
+	}else{
+		$(this).parent('.row').prepend(inpTag);
+	}
+});
+/*e::20230508*/
+</script>
 </html>
