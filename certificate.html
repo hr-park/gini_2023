@@ -17,10 +17,6 @@
 	<meta property="og:url" content="www.classboxenglish.com/intro.asp" />
 	<meta property="og:image" content="www.classboxenglish.com/img/santa.jpeg" />
 	<link rel="canonical" href="www.classboxenglish.com/intro.asp" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-	<link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 	<link href="https://www.classboxenglish.com/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
     <link href="https://www.classboxenglish.com/css/jquery-ui.structure.css" rel="stylesheet" type="text/css">
     <link href="https://www.classboxenglish.com/css/jquery-ui.theme.css" rel="stylesheet" type="text/css">
@@ -283,7 +279,7 @@
 		<div class="sta">
 			<div class="contents_wrap">
 				<a href="../../intro.asp" class="logo">
-					<img src="../../img/new2/logo.png" alt="CLASSBOX">
+					<img src="https://www.classboxenglish.com/img/new2/logo.png" alt="CLASSBOX">
 				</a>
 				<a href="#n" class="btn_open_search"><span class="blind">검색</span></a> <!--T738|Search|검색-->
 				<a href="javascript:;" class="btn_menu"><span class="blind">메뉴</span></a> <!--T739|Menu|메뉴-->
@@ -559,9 +555,10 @@
 						.certificate{max-width:1200px;margin:0 auto;}
 						.certificate .inner{padding:25px 0;max-width:843px;}
 						.certificate .h3 div strong{font-family:'Noto Sans KR';}
-						.certificate .cert_box{position:relative;min-width:360px;/*height:596*/}
+						.certificate .cert_box{position:relative;/*min-width:360px;*/min-width:318px;/*height:596*/}
 						.certificate .cert_box > img{width:100%}
 						.certificate .cert_box .txt{position:absolute;font-family:'Noto Sans KR';}
+						.certificate .cert_box .txt.user_name{left:6.4%;top:40.1%;min-width:64px;font-weight:700;font-size:16px;line-height:1.43;letter-spacing:-0.02em;color:#222;text-align-last:justify;}
 						.certificate .cert_box .txt.date{left:3.94%;top:83.89%;font-weight:700;font-size:16px;line-height:1.43;letter-spacing:-0.02em;color:#222;}
 						.certificate .cert_box .txt.subject{left:25.62%;right:5.45%;top:46.97%;font-size:16px;line-height:1.43;letter-spacing: -0.02em;color:#222;word-break:keep-all;}
 						.certificate .cert_box .txt.subject .instructor{display:block;margin-top:1.67%}
@@ -571,9 +568,10 @@
 						.certificate .info_box p{font-size:16px;line-height:1.43;font-family:'Noto Sans KR';word-break:keep-all}
 						.certificate .info_box p .link{color:#3999FF;text-decoration:underline}
 						.certificate .info_box .btn_download{display:inline-flex;align-items:center;justify-content:center;min-width:140px;height:40px;background:#444;border-radius:4px;color:#fff;font-size:14px;font-family:'Noto Sans KR';}
-						.certificate .info_box .btn_download:before{content:'';display:inline-block;width:12px;height:12px;margin-right:8px;background:url('img/teacher/ico_download.svg') no-repeat 50% 50% / 100% auto}
+						.certificate .info_box .btn_download:before{content:'';display:inline-block;width:20px;height:20px;margin-right:4px;background:url('img/teacher/ico_download.svg') no-repeat 50% 50% / 100% auto}
 
 						@media all and (max-width:1000px){
+							.certificate .cert_box .txt.user_name{min-width:8.11%;font-size:14px;}
 							.certificate .cert_box .txt.date{/*font-size:1.89vw;*/font-size:14px;}
 							.certificate .cert_box .txt.subject{/*font-size:1.89vw;*/font-size:13px;}
 							.certificate .cert_box .txt.no{/*font-size:1.18vw;*/font-size:9px;}
@@ -588,6 +586,7 @@
 							.classroom .list .btn_box .btn{width:calc(50% - 4px);height:32px;line-height:32px;margin:0 8px 0 0;padding:0;}
 						}
 						@media all and (max-width:640px){
+							.certificate .cert_box .txt.user_name{font-size:1.89vw;}
 							.certificate .cert_box .txt.date{font-size:1.89vw;}
 							.certificate .cert_box .txt.subject{top:43%;font-size:1.89vw;}
 							.certificate .cert_box .txt.no{font-size:1.18vw;}
@@ -608,6 +607,7 @@
 								<div class="inner">
 									<div class="cert_box">
 										<img src="img/teacher/img_certificate.png" alt="CERTIFICATE OF COMPLETAON ">
+										<p class="txt user_name">홍 길 동</p>
 										<p class="txt date">2023. 05. 30</p>
 										<p class="txt subject">[오프라인 원데이 클래스] 브랜딩 점검의 날 - 선생님이 반드시 잘 되는 퍼스널 브랜딩 성공법 선생님이 반드시 잘 되는 퍼스널 브랜딩 성공법<span class="instructor"><em>Instructor</em>혼공 유니버스 허준석</span></p>
 										<p class="txt no">Certificate No. 59806015600116-054080608090410 (Product Name, User Name, Certified Date)​</p>
